@@ -25,7 +25,7 @@ interface Options {
 const LottieAnimation: React.FC<LottieAnimationProps> = ({ animationData, speed = 1, height = 400, width = 400 }) => {
 
     const defaultOptions: Options = {
-        loop: true,
+        loop: false,
         autoplay: true,
         animationData: animationData,
         rendererSettings: {
