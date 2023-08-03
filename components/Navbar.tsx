@@ -1,5 +1,3 @@
-"use client"
-import { useState } from 'react';
 import Link from 'next/link';
 import { IoIosMenu, IoIosClose, IoMdSearch } from 'react-icons/io';
 import DismissableModal from './NavLinkModal';
@@ -7,11 +5,8 @@ import ToggleModeButton from './ToogleMode';
 
 function NavBar() {
 
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
-
     return (
-        <nav className="bg-indigo-500 ">
+        <nav className="bg-yellow-500 ">
 
             <div className="px-2 mx-auto max-w-7xl sm:px-4 lg:px-8">
 
@@ -20,9 +15,7 @@ function NavBar() {
                     {/* Logo */}
                     <div className="px-2 lg:w-0 lg:flex-1">
                         <Link href="/" className="flex items-center text-white">
-                            <svg className="h-8 w-8" viewBox="0 0 24 24" fill="none">
-                                {/* ... */}
-                            </svg>
+
                             <span className="text-xl font-bold ml-2">DocScanWiz</span>
                         </Link>
                     </div>
@@ -68,31 +61,11 @@ function NavBar() {
                     </div>
 
                     {/* Mobile Navigation */}
-                    <div className="-mr-2 -my-2 lg:hidden">
+                    <div className="flex justify-end -mr-2 -my-2 lg:hidden">
 
-                        {/* Search Button */}
-                        <button
-                            onClick={() => setIsSearchOpen(!isSearchOpen)}
-                            className="inline-flex items-center justify-center p-2 rounded-md focus:outline-none"
-                        >
-                            <IoMdSearch className="text-white h-6 w-6" aria-hidden="true" />
-                        </button>
-
-                        {/* Hamburger Menu */}
-                        <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className="inline-flex items-center justify-center p-2 rounded-md"
-                        >
-                            {isOpen ? (
-                                <IoIosClose className="h-6 w-6 text-white" aria-hidden="true" />
-                            ) : (
-                                <IoIosMenu className="h-6 w-6 text-white" aria-hidden="true" />
-                            )}
-                        </button>
+                        <DismissableModal />
 
                     </div>
-
-                    {isOpen && <DismissableModal open={isOpen} />}
 
                     <ToggleModeButton />
 
