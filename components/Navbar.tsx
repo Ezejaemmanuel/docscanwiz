@@ -56,7 +56,6 @@ function NavBar() {
                                 type="text"
                                 placeholder="Search..."
                             />
-                            <IoMdSearch className="h-6 w-6 text-gray-400" />
                         </div>
                     </div>
 
