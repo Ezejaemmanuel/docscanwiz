@@ -60,13 +60,16 @@ function NavBar() {
                     </div>
 
                     {/* Mobile Navigation */}
-                    <div className="flex justify-end -mr-2 -my-2 lg:hidden">
+                    <div className="flex justify-end -mr-2 -my-2 ">
+                        <div className="lg:hidden">
+                            <DismissableModal />
+                        </div>
 
-                        <DismissableModal />
+                        <ToggleModeButton />
 
                     </div>
 
-                    <ToggleModeButton />
+
 
                 </div>
             </div>
