@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { useState } from 'react';
 import Link from 'next/link';
 import { IoIosMenu, IoIosClose, IoMdSearch } from 'react-icons/io';
@@ -11,7 +11,7 @@ function NavBar() {
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
 
     return (
-        <nav className="bg-indigo-500 transition duration-300 ease-in-out">
+        <nav className="bg-indigo-500 ">
 
             <div className="px-2 mx-auto max-w-7xl sm:px-4 lg:px-8">
 
