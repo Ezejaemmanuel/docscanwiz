@@ -60,7 +60,7 @@ function NavBar() {
                     </div>
 
                     {/* Mobile Navigation */}
-                    <div className="flex justify-end -mr-2 -my-2 ">
+                    <div className="flex justify-end -mr-2 -my-2 px-2 ">
                         <div className="lg:hidden">
                             <DismissableModal />
                         </div>
