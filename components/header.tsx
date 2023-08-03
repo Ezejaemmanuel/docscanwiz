@@ -13,7 +13,7 @@ const HeroSection: React.FC = () => {
         <section className="bg-white dark:bg-gray-900">
             <div className="flex flex-col-reverse lg:flex-row-reverse max-w-screen-xl px-4 py-8 mx-auto lg:space-x-reverse lg:space-x-8 lg:py-16 space-y-8 lg:space-y-0">
                 <div className="flex-1 flex justify-center items-center">
-                    <LottieAnimation animationData={Scanning} speed={1} />
+                    <LottieAnimation animationData={Scanning} speed={1} width={300} height={400} />
                 </div>
 
                 <div className="flex-1 flex flex-col justify-center lg:items-start">
