@@ -6,7 +6,9 @@ import Link from 'next/link';
 //import forexChat from '../public/yellow_forex.json';
 import LottieAnimationDynamic from './LottieAnimation/LottieAnimationDynamic';
 import Scanning from '../public/scanning.json'
-import AnimatedText from './AnimatedText';
+import dynamic from 'next/dynamic';
+
+const AnimatedText = dynamic(() => import('./AnimatedText').then(mod => mod));
 
 const HeroSection: React.FC = () => {
 

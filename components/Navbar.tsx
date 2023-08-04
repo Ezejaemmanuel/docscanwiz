@@ -1,8 +1,9 @@
 import Link from 'next/link';
-import { IoIosMenu, IoIosClose, IoMdSearch } from 'react-icons/io';
-import DismissableModal from './NavLinkModal';
-import ToggleModeButton from './ToogleMode';
-
+//import { IoIosMenu, IoIosClose, IoMdSearch } from 'react-icons/io';
+import dynamic from 'next/dynamic';
+//import ToggleModeButton from './ToogleMode';
+const DismissableModal = dynamic(() => import('./NavLinkModal').then(mod => mod));
+const ToggleModeButton = dynamic(() => import('./ToogleMode').then(mod => mod));
 function NavBar() {
 
     return (

@@ -1,8 +1,8 @@
 // app/components/WhyChooseUs.server.jsx
+import { AiOutlineRight } from 'react-icons/ai'
+
 import boxes from './boxes.json';
 export default async function WhyChooseUs() {
-
-    const { AiOutlineRight } = await import('react-icons/ai')
 
 
 
