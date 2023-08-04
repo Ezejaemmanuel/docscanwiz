@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+
 import './globals.css';
 
 import { Inter } from 'next/font/google';
@@ -32,15 +33,15 @@ export default function RootLayout({ children }: Props) {
 
   return (
     <html lang="en">
-
-      
-      
-
       <body className={inter.className}>
-        <Navbar />
-        {children}
-      </body>
 
+        <div className="fixed top-0 left-0 right-0 z-50">
+          <Navbar />
+        </div>
+
+        {children}
+
+      </body>
     </html>
   );
 
