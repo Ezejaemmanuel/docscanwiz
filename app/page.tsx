@@ -13,6 +13,7 @@ const Home: React.FC = () => {
 
       <div className="w-full    rounded-lg shadow-lg">
         <HeroSection />
+
       </div>
 
       <div className="w-full   p-2 rounded-lg shadow-lg">
