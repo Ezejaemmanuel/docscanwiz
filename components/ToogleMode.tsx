@@ -1,26 +1,27 @@
 "use client";
-import { useState, useEffect } from 'react';
-import { FiMoon, FiSun } from 'react-icons/fi';
+import { useState, useEffect } from 'react'
+
+import { FiSun, FiMoon } from 'react-icons/fi';
 
 const ToggleModeButton: React.FC = () => {
 
     const [darkMode, setDarkMode] = useState<boolean>(() => {
         if (typeof window !== 'undefined') {
-            const isDark = localStorage.getItem('darkMode');
-            return JSON.parse(isDark!) as boolean;
+            const isDark = localStorage.getItem('darkMode')
+            return JSON.parse(isDark!) as boolean
         }
-        return false;
-    });
+        return false
+    })
 
     useEffect(() => {
         if (darkMode) {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('darkMode', JSON.stringify(true));
+            document.documentElement.classList.add('dark')
+            localStorage.setItem('darkMode', JSON.stringify(true))
         } else {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('darkMode', JSON.stringify(false));
+            document.documentElement.classList.remove('dark')
+            localStorage.setItem('darkMode', JSON.stringify(false))
         }
-    }, [darkMode]);
+    }, [darkMode])
 
     return (
         <button
@@ -28,12 +29,17 @@ const ToggleModeButton: React.FC = () => {
             onClick={() => setDarkMode(!darkMode)}
         >
             {darkMode ? (
-                <FiMoon size={20} className="text-zinc-900 dark:text-zinc-100" />
+                <div className="text-zinc-900 dark:text-zinc-100">
+                    <FiMoon />
+                </div>
             ) : (
-                <FiSun size={20} className="text-zinc-900 dark:text-zinc-100" />
+                <div className="text-zinc-900 dark:text-zinc-100">
+                    <FiSun />
+
+                </div>
             )}
         </button>
-    );
+    )
 }
 
-export default ToggleModeButton;
+export default ToggleModeButton

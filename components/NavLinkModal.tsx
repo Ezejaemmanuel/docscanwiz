@@ -2,8 +2,15 @@
 import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
-import { IoIosMenu, IoIosClose, IoMdSearch } from 'react-icons/io';
+//import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+import { IoIosMenu, IoMdSearch } from 'react-icons/io';
+import dynamic from 'next/dynamic';
+
+const Popover = dynamic(() => import('@/components/ui/popover').then(mod => mod.Popover));
+
+const PopoverTrigger = dynamic(() => import('@/components/ui/popover').then(mod => mod.PopoverTrigger));
+
+const PopoverContent = dynamic(() => import('@/components/ui/popover').then(mod => mod.PopoverContent));
 
 
 const DismissableModal: React.FC = () => {
