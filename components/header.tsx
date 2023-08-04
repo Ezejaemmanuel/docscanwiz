@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 //import AnimatedText from './AnimatedText';
 //import forexChat from '../public/yellow_forex.json';
-import LottieAnimationDynamic from './LottieAnimationDynamic';
+import LottieAnimationDynamic from './LottieAnimation/LottieAnimationDynamic';
 import Scanning from '../public/scanning.json'
 import AnimatedText from './AnimatedText';
 

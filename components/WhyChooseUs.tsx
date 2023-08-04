@@ -1,5 +1,5 @@
-
 import { AiOutlineRight } from 'react-icons/ai';
+
 import boxes from './boxes.json';
 
 const WhyChooseUs = () => {
@@ -16,15 +16,17 @@ const WhyChooseUs = () => {
                 {boxes.map(box => (
                     <div
                         key={box.title}
-                        className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-lg p-6 m-3 flex-basis-full max-w-md"
+                        className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-lg p-6 m-3 flex-basis-full max-w-md lg:flex-basis-1/3 md:flex-basis-1/2 sm:flex-basis-full lg:p-4 md:p-3 sm:p-2 sm:max-w-xs"
                     >
                         <div>
                             <h3 className="text-2xl font-bold mb-4">
                                 {box.title}
                             </h3>
+
                             <p className="text-lg leading-relaxed">
                                 {box.text}
                             </p>
+
                         </div>
 
                         <div className="flex justify-end text-gray-400 dark:text-gray-500">

@@ -1,4 +1,4 @@
-import Navbar from '@/components/Navbar'
+
 import WhyChooseUs from '@/components/WhyChooseUs'
 import HeroSection from '@/components/header'
 import Image from 'next/image'
