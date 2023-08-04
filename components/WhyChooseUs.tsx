@@ -1,18 +1,18 @@
-import { AiOutlineRight } from 'react-icons/ai';
-
+// app/components/WhyChooseUs.server.jsx
 import boxes from './boxes.json';
+export default async function WhyChooseUs() {
 
-const WhyChooseUs = () => {
+    const { AiOutlineRight } = await import('react-icons/ai')
+
+
 
     return (
         <section className="py-8 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-
             <h2 className="text-4xl mb-6 font-bold text-center">
                 Why Choose Our Service?
             </h2>
 
             <div className="flex flex-wrap justify-center">
-
                 {boxes.map(box => (
                     <div
                         key={box.title}
@@ -22,11 +22,9 @@ const WhyChooseUs = () => {
                             <h3 className="text-2xl font-bold mb-4">
                                 {box.title}
                             </h3>
-
                             <p className="text-lg leading-relaxed">
                                 {box.text}
                             </p>
-
                         </div>
 
                         <div className="flex justify-end text-gray-400 dark:text-gray-500">
@@ -34,11 +32,7 @@ const WhyChooseUs = () => {
                         </div>
                     </div>
                 ))}
-
             </div>
-
         </section>
-    );
+    )
 }
-
-export default WhyChooseUs;
