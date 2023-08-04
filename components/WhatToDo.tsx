@@ -32,7 +32,7 @@ const DocumentExtractor: React.FC = () => {
         <div className="flex flex-col md:flex-row">
 
             {steps.map(step => (
-                <div className={'bg-gray-200  text-gray-700 p-4 m-4 rounded-lg w-full'}>
+                <div key={step.title} className={'bg-gray-200  text-gray-700 p-4 m-4 rounded-lg w-full'}>
                     <h2 className="text-lg font-medium">{step.title}</h2>
                     <p className="text-sm mt-2">{step.text}</p>
 
