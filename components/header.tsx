@@ -7,13 +7,12 @@ import Link from 'next/link';
 import LottieAnimationDynamic from './LottieAnimation/LottieAnimationDynamic';
 import Scanning from '../public/scanning.json'
 import dynamic from 'next/dynamic';
-import Loading from './loader';
 
 const AnimatedText = dynamic(
     () => import('./AnimatedText'),
     {
         ssr: false,
-        loading: () => <Loading />,
+        loading: () => <div>loading.....</div>,
     }
 )
 const HeroSection: React.FC = () => {

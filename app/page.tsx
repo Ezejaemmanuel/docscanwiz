@@ -5,7 +5,6 @@ import WhyChooseUs from '@/components/WhyChooseUs';
 import HeroSection from '@/components/header';
 import Image from 'next/image';
 import DocumentExtractor from '@/components/WhatToDo';
-import Loading from '@/components/loader';
 
 const Home: React.FC = () => {
   return (
@@ -21,7 +20,6 @@ const Home: React.FC = () => {
       </div>
       <div className="w-full   p-2 rounded-lg shadow-lg">
         <DocumentExtractor />
-        <Loading />
       </div>
 
 

@@ -1,10 +1,10 @@
 "use client";
 import React from 'react'
-import Loading from '@/components/loader';
-const Loadings: React.FC = () => {
+
+const Loading: FC = () => {
     return (
-        <Loading />
+        <div>loading ...0oooooooo</div>
     )
 }
 
-export default Loadings;
+export default Loading;
