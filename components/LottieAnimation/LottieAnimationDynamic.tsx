@@ -1,9 +1,11 @@
 "use client";
 import dynamic from 'next/dynamic';
+import Loading from '../loader';
 
 const LottieAnimation = dynamic(() => import('./LottieAnimation'), {
     ssr: false, // This line is important. It disables server-side rendering for this component.
-    loading: () => <div>Loading...</div>,
+
+    loading: () => < Loading />,
 });
 
 interface AnimationData extends Record<string, unknown> { }
