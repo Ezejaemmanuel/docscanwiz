@@ -1,5 +1,4 @@
 // components/Loading.tsx
-"use client";
 import { FC } from 'react';
 
 const Loading: FC = () => {
