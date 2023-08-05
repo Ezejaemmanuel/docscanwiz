@@ -3,7 +3,8 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 //import ToggleModeButton from './ToogleMode';
 const DismissableModal = dynamic(() => import('./NavLinkModal').then(mod => mod));
-const ToggleModeButton = dynamic(() => import('./ToogleMode').then(mod => mod));
+import { ModeToggle } from './ToogleMode';
+
 function NavBar() {
 
     return (
@@ -66,7 +67,7 @@ function NavBar() {
                             <DismissableModal />
                         </div>
 
-                        <ToggleModeButton />
+                        <ModeToggle />
 
                     </div>
 
