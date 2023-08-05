@@ -14,20 +14,20 @@ interface Props {
 export const metadata = {
   title: 'DocScanWiz - Document Digitization',
   description: 'DocScanWiz uses advanced OCR technology to digitize your documents and extract text rapidly and accurately.',
-  openGraph: {
-    title: 'DocScanWiz - Document Digitization',
-    description: 'DocScanWiz uses advanced OCR technology to digitize your documents and extract text rapidly and accurately.',
-    url: 'https://www.docscanwiz.vercel.app',
-    siteName: 'DocScanWiz',
-    images: [
-      {
-        url: 'https://www.docscanwiz.vercel.app/og-image.jpg',
-        width: 800,
-        height: 600,
-        alt: 'DocScanWiz og image',
-      }
-    ]
-  }
+  // openGraph: {
+  //   title: 'DocScanWiz - Document Digitization',
+  //   description: 'DocScanWiz uses advanced OCR technology to digitize your documents and extract text rapidly and accurately.',
+  //   url: 'https://www.docscanwiz.vercel.app',
+  //   siteName: 'DocScanWiz',
+  //   images: [
+  //     {
+  //       url: 'https://www.docscanwiz.vercel.app/og-image.jpg',
+  //       width: 800,
+  //       height: 600,
+  //       alt: 'DocScanWiz og image',
+  //     }
+  //   ]
+  // }
 }
 
 export default function RootLayout({ children }: Props) {
