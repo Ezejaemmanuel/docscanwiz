@@ -4,6 +4,7 @@ import './globals.css';
 
 import { Inter } from 'next/font/google';
 import ContactUs from '@/components/Footer';
+import { ThemeProvider } from '@/components/theme-provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -35,14 +36,16 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className='dark:bg-black bg-slate-50'>
-          <div className="fixed top-0 left-0 right-0 z-50">
-            <Navbar />
-          </div>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <div className='dark:bg-black bg-slate-50'>
+            <div className="fixed top-0 left-0 right-0 z-50">
+              <Navbar />
+            </div>
 
-          {children}
-          <ContactUs />
-        </div>
+            {children}
+            <ContactUs />
+          </div>
+        </ThemeProvider>
 
       </body>
     </html>
