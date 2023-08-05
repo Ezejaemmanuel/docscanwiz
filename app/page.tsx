@@ -14,13 +14,13 @@ const Home: React.FC = () => {
         <HeroSection />
 
       </div>
-
-      <div className="w-full   p-2 rounded-lg shadow-lg">
-        <WhyChooseUs />
-      </div>
       <div className="w-full   p-2 rounded-lg shadow-lg">
         <DocumentExtractor />
       </div>
+      <div className="w-full   p-2 rounded-lg shadow-lg">
+        <WhyChooseUs />
+      </div>
+
 
 
     </div>

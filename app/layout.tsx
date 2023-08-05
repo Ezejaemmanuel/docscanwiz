@@ -34,13 +34,13 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <div className='dark:bg-black bg-slate-50'>
+          <div className="fixed top-0 left-0 right-0 z-50">
+            <Navbar />
+          </div>
 
-        <div className="fixed top-0 left-0 right-0 z-50">
-          <Navbar />
+          {children}
         </div>
-
-        {children}
-
       </body>
     </html>
   );
