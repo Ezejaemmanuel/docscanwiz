@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 //import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
-import { IoIosMenu, IoMdSearch } from 'react-icons/io';
+import { IoIosMenu, IoMdSearch } from './DynamicPackages/OptimizeIcons';
 import dynamic from 'next/dynamic';
 
 const Popover = dynamic(() => import('@/components/ui/popover').then(mod => mod.Popover));
@@ -27,7 +27,7 @@ const DismissableModal: React.FC = () => {
 
                 <div className="flex items-center space-x-4">
                     <Input placeholder="Search..." className="w-full bg-gray-200 text-gray-700 px-4 py-2 rounded-md focus:outline-none" />
-                    <IoMdSearch className="text-gray-500 h-6 w-6" />
+                    <div className="text-gray-500 h-6 w-6"> <IoMdSearch /></div>
                 </div>
 
                 <div className="flex flex-col mt-4 space-y-2 text-gray-700">

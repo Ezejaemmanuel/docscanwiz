@@ -64,7 +64,7 @@
 
 // app/components/WhyChooseUs.server.jsx 
 
-import { AiOutlineRight } from 'react-icons/ai'
+import { AiOutlineRight } from './DynamicPackages/OptimizeIcons'
 
 import boxes from './boxes.json';
 
@@ -110,7 +110,7 @@ export default async function WhyChooseUs() {
 
                         <div className="flex justify-end text-gray-400 dark:text-gray-500">
 
-                            <AiOutlineRight size={28} />
+                            <AiOutlineRight />
 
                         </div>
 

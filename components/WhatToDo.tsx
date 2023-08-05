@@ -1,6 +1,6 @@
 import React from 'react';
-import { SiGoogledrive } from 'react-icons/si';
-import { RiFileSearchLine } from 'react-icons/ri';
+import { SiGoogledrive } from './DynamicPackages/OptimizeIcons';
+import { RiFileSearchLine } from './DynamicPackages/OptimizeIcons';
 
 const steps = [
     {
@@ -36,7 +36,10 @@ const DocumentExtractor: React.FC = () => {
                         <p className="text-sm mt-2">{step.text}</p>
 
                         <div className="mt-4 flex justify-center">
-                            <step.icon className={`h-12 w-12 p-2 rounded-lg bg-white dark:bg-gray-300 border ${step.borderColor} text-yellow-500`} />
+                            <div className={`h-12 w-12 p-2 rounded-lg bg-white dark:bg-gray-300 border ${step.borderColor} text-yellow-500`}>
+                                <step.icon />
+
+                            </div>
                         </div>
                     </div>
                 ))}

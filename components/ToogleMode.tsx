@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react'
 
-import { FiSun, FiMoon } from 'react-icons/fi';
+import { FiSun, FiMoon } from './DynamicPackages/OptimizeIcons';
 
 const ToggleModeButton: React.FC = () => {
 
