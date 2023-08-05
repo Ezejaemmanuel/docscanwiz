@@ -1,10 +1,21 @@
 "use client";
-import React, { FC } from 'react'
+// import React, { FC } from 'react'
 
-const Loading: FC = () => {
+// const Loading: FC = () => {
+//     return (
+//         <div>loading ...0oooooooo</div>
+//     )
+// }
+
+// export default Loading;
+import React from 'react';
+
+const Loading: React.FC = () => {
     return (
-        <div>loading ...0oooooooo</div>
-    )
-}
+        <div className="flex items-center justify-center h-screen">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-900"></div>
+        </div>
+    );
+};
 
 export default Loading;
