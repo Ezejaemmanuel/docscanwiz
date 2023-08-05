@@ -25,7 +25,7 @@ const HeroSection: React.FC = () => {
                 </div>
 
                 <div className="flex-1 flex flex-col justify-center lg:items-start">
-                    <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none font-serif md:text-5xl xl:text-6xl dark:text-white bg-clip-text text-transparent">
+                    <h1 className="max-w-2xl mb-4 text-4xl text-black font-extrabold tracking-tight leading-none font-serif md:text-5xl xl:text-6xl dark:text-white bg-clip-text text-transparent">
                         <span className="text-black dark:text-white">D</span>
                         <span className="text-black dark:text-white">o</span>
                         <span className="text-black dark:text-white">c</span>
