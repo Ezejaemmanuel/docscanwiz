@@ -33,7 +33,7 @@ const ContactUs: React.FC = () => {
             <main className="container mx-auto px-4 py-8">
                 <div className="flex flex-col lg:flex-row">
                     {sections.map((section, index) => (
-                        <section key={index} className="flex flex-col items-center justify-center gap-4 mt-8 lg:w-1/3">
+                        <section key={index} className="flex flex-col lg:flex-row items-center justify-center gap-4 mt-8 lg:w-1/3">
                             <div className="flex items-center justify-center">
                                 {section.icon}
                                 <div className="ml-2 text-xl font-bold text-center">
