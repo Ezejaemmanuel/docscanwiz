@@ -9,7 +9,7 @@ import Scanning from '../public/scanning.json'
 import dynamic from 'next/dynamic';
 import { CircleIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
-import { RegisterLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/server";
+import ButtonComponent from './kinde/Signup-button';
 const AnimatedText = dynamic(
     () => import('./AnimatedText'),
     {
@@ -48,12 +48,8 @@ const HeroSection: React.FC = () => {
                                 <CircleIcon className="mr-2 h-4 w-4" /> Get Started
                             </Button>
                         </Link>
+                        <ButtonComponent />
 
-                        <Button className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
-                            <div className="mr-2 h-4 w-4">
-                                <RegisterLink>Sign up</RegisterLink>
-                            </div>
-                        </Button>
                     </div>
                 </div>
             </div>
