@@ -9,6 +9,7 @@ import Scanning from '../public/scanning.json'
 import dynamic from 'next/dynamic';
 import { CircleIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
+import { RegisterLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/server";
 const AnimatedText = dynamic(
     () => import('./AnimatedText'),
     {
@@ -41,14 +42,18 @@ const HeroSection: React.FC = () => {
                     <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
                         <AnimatedText inputText={'DocScanWiz is a platform that allows you to easily extract text and data from documents, images, PDFs, and other files. Our advanced OCR technology can digitize your paperwork in seconds. Simply upload your documents and let DocScanWiz do the hard work for you. Our system is fast, accurate, and secure - perfect for managing all your business documents.'} randomizeColor={true} colorStart={'yellow'} colorEnd={'purple'} />
                     </p>
-                    <div>
+                    <div className='flex'>
                         <Link href={"/dashboard"} >
                             <Button className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                                 <CircleIcon className="mr-2 h-4 w-4" /> Get Started
                             </Button>
-
-
                         </Link>
+                        <RegisterLink>Sign up</RegisterLink>
+                        <Button className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                            <div className="mr-2 h-4 w-4">
+                                <RegisterLink>Sign up</RegisterLink>
+                            </div>
+                        </Button>
                     </div>
                 </div>
             </div>
