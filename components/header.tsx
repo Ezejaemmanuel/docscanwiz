@@ -7,7 +7,8 @@ import Link from 'next/link';
 import LottieAnimationDynamic from './LottieAnimation/LottieAnimationDynamic';
 import Scanning from '../public/scanning.json'
 import dynamic from 'next/dynamic';
-
+import { CircleIcon } from "@radix-ui/react-icons"
+import { Button } from "@/components/ui/button"
 const AnimatedText = dynamic(
     () => import('./AnimatedText'),
     {
@@ -35,15 +36,20 @@ const HeroSection: React.FC = () => {
                         <span className="text-green-500">n</span>
                         <span className="text-black dark:text-white">W</span>
                         <span className="text-black dark:text-white">i</span>
-                        <span className="text-black dark:text-white">z</span> -Unlock the power of document digitization with DocScanWiz</h1>
+                        <span className="text-black dark:text-white">z</span> -<h1 className='text-black dark:text-white'>Unlock the power of document digitization with DocScanWiz</h1></h1>
 
                     <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
                         <AnimatedText inputText={'DocScanWiz is a platform that allows you to easily extract text and data from documents, images, PDFs, and other files. Our advanced OCR technology can digitize your paperwork in seconds. Simply upload your documents and let DocScanWiz do the hard work for you. Our system is fast, accurate, and secure - perfect for managing all your business documents.'} randomizeColor={true} colorStart={'yellow'} colorEnd={'purple'} />
                     </p>
-                    <div></div>
-                    <Link href={"/dashboard"} className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
-                        Get STARTED
-                    </Link>
+                    <div>
+                        <Link href={"/dashboard"} >
+                            <Button className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                                <CircleIcon className="mr-2 h-4 w-4" /> Get Started
+                            </Button>
+
+
+                        </Link>
+                    </div>
                 </div>
             </div>
         </section>

@@ -1,6 +1,6 @@
 "use client";
 import MainArea from "@/components/dashboard-mainArea";
-import Sidebar from "@/components/dashboard-sidebar";
+import Sidebar from "@/components/sidebar/dashboard-sidebar";
 import Header from "@/components/dashboard-header";
 import React, { useState } from "react";
 
