@@ -7,7 +7,7 @@ import ContactUs from '@/components/Footer';
 import { ThemeProvider } from '@/components/theme-provider';
 
 const inter = Inter({ subsets: ['latin'] });
-
+import { ClerkProvider } from '@clerk/nextjs'
 interface Props {
   children: React.ReactNode;
 }
@@ -34,6 +34,7 @@ export const metadata = {
 export default function RootLayout({ children }: Props) {
 
   return (
+    <ClerkProvider>
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
@@ -48,7 +49,8 @@ export default function RootLayout({ children }: Props) {
         </ThemeProvider>
 
       </body>
-    </html>
+      </html>
+    </ClerkProvider>
   );
 
 }
