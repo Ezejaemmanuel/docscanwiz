@@ -1,7 +1,7 @@
 "use client";
 const MainArea: React.FC<{ activeTab: string }> = ({ activeTab }) => {
     return (
-        <main className="flex flex-col justify-center items-center w-4/5">
+        <main className="flex flex-col justify-center items-center w-4/5 pt-40">
             {activeTab === "home" && (
                 <div>
                     <h1 className="text-3xl mb-4">Welcome to the Dashboard</h1>

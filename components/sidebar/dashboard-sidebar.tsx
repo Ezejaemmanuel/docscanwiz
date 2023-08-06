@@ -10,7 +10,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
     return (
         <div>
-            <div className="block lg:hidden">
+            <div className="block lg:hidden ">
                 <Mobile setActiveTab={setActiveTab} />
             </div>
             <div className='hidden lg:block'>

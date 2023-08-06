@@ -22,7 +22,7 @@ const MobileSidebar: React.FC<{ setActiveTab: (tab: string) => void }> = ({ setA
 
     return (
         <Sheet>
-            <SheetTrigger>
+            <SheetTrigger className="z-60 pt-20">
                 <Button variant="outline">Open menu</Button>
             </SheetTrigger>
             <SheetContent side={"left"}>

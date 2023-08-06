@@ -15,7 +15,7 @@ const DesktopSidebars: React.FC<{ setActiveTab: (tab: string) => void }> = ({ se
     ];
 
     return (
-        <nav className="h-screen w-1/5 lg:flex md:flex flex-col pt-12 justify-center border-spacing-3 rounded-md sm:hidden dark:bg-gray-800 bg-slate-300 z-20 text-gray-200">
+        <nav className="h-screen w-1/5 lg:flex md:flex flex-col pt-12 justify-center border-spacing-3 rounded-md sm:hidden dark:bg-gray-800 bg-slate-300 z-5 text-gray-200">
             {DesktopSidebarsItems.map((item) => (
                 <div
                     key={item.id}

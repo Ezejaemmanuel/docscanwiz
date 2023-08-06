@@ -1,7 +1,7 @@
 "use client";
 import MainArea from "@/components/dashboard-mainArea";
 import Sidebar from "@/components/sidebar/dashboard-sidebar";
-import Header from "@/components/dashboard-header";
+// import Header from "@/components/dashboard-header";
 import React, { useState } from "react";
 
 const DashboardPage: React.FC = () => {
@@ -11,7 +11,7 @@ const DashboardPage: React.FC = () => {
         <div className="flex">
             <Sidebar setActiveTab={setActiveTab} />
             <div className="flex flex-col w-full">
-                <Header />
+                {/* <Header /> */}
                 <MainArea activeTab={activeTab} />
             </div>
         </div>
