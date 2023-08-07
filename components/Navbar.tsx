@@ -68,6 +68,7 @@ function NavBar() {
                         </div>
 
                         <ModeToggle />
+                        <UserButtonHere />
 
                     </div>
 
