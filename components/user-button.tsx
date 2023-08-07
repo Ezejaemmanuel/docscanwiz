@@ -1,4 +1,5 @@
 //app/page.tsx
+"use client";
 import { UserButton } from "@clerk/nextjs";
 export default function UserButtonHere() {
     return (
@@ -7,3 +8,4 @@ export default function UserButtonHere() {
         </div>
     )
 }
+
