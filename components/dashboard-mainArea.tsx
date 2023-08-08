@@ -2,6 +2,7 @@
 
 import { useUser } from "@clerk/nextjs";
 import SignInComponent from "./YouAreNotSignedIn";
+import MyDropzone from "./upload/upload";
 
 
 const MainArea: React.FC<{ activeTab: string }> = ({ activeTab }) => {
@@ -20,12 +21,7 @@ const MainArea: React.FC<{ activeTab: string }> = ({ activeTab }) => {
                 </div>
             )}
             {activeTab === "upload" && (
-                <div>
-                    <button className="bg-blue-500 text-white rounded-lg px-4 py-2 mb-4">
-                        <span>Add files</span>
-                    </button>
-                    <p>Supported file types and icons here...</p>
-                </div>
+                <MyDropzone />
             )}
             {activeTab === "history" && (
                 <div>

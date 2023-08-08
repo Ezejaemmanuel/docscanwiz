@@ -7,7 +7,7 @@
 .yarn
 # testing
 /coverage
-
+.yarn
 # next.js
 /.next/
 /out/

@@ -15,6 +15,7 @@ const AnimatedText = dynamic(
         ssr: false,
         loading: () => <div>loading.....</div>,
     }
+
 )
 const HeroSection: React.FC = () => {
 
@@ -24,7 +25,6 @@ const HeroSection: React.FC = () => {
                 <div className="flex-1 flex justify-center items-center">
                     <LottieAnimationDynamic animationData={Scanning} speed={1} width={300} height={400} />
                 </div>
-
                 <div className="flex-1 flex flex-col justify-center lg:items-start">
                     <h1 className="max-w-2xl mb-4 text-4xl text-black font-extrabold tracking-tight leading-none font-serif md:text-5xl xl:text-6xl dark:text-white bg-clip-text text-transparent">
                         <span className="text-black dark:text-white">D</span>
