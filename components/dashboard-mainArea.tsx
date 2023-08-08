@@ -47,25 +47,28 @@
 //     );
 // };
 
-// export default MainArea;
-"use client";
-import React, { Suspense, useState } from 'react';
+// export default MainArea;import React, { Suspense, useState } from 'react';import React, { Suspense, useState } from 'react';
+"use client"
 import { useUser } from '@clerk/nextjs';
 import dynamic from 'next/dynamic';
 import LoadingComponent from './aboutToLoad';
+import Image from 'next/image';
+import { Suspense, useState } from 'react';
+import { confirmOrCreate } from '@/app/actions/connectAndConfirmClerkAndPrisma';
 
 const SignInComponent = dynamic(() => import('./YouAreNotSignedIn'));
 const MyDropzone = dynamic(() => import('./upload/upload'));
+const AnimatedText = dynamic(() => import('./AnimatedText'));
 
-const MainArea: React.FC<{ activeTab: string }> = ({ activeTab }) => {
+const MainArea: React.FC<{ activeTab: string }> = async ({ activeTab }) => {
     const { isLoaded, isSignedIn, user } = useUser();
     const [currentTab, setCurrentTab] = useState(activeTab);
-
+    const confirmed = await confirmOrCreate();
     if (!isLoaded) {
-        return <LoadingComponent loadingText={"loading user info"} />;
+        return <LoadingComponent loadingText={'loading user info'} />;
     }
 
-    if (!isSignedIn) {
+    if (!isSignedIn || !confirmed) {
         return <SignInComponent />;
     }
 
@@ -76,30 +79,25 @@ const MainArea: React.FC<{ activeTab: string }> = ({ activeTab }) => {
     return (
         <main className="flex flex-col justify-center items-center w-4/5 pt-40">
             {currentTab === 'home' ? (
-                <div> {/* Replacing the home introduction div with the provided code */}
-                    <h1 className="text-3xl mb-4">Hi, {user?.fullName}, Welcome to the Dashboard</h1>
-                    <p>Welcome to our website, where you can easily add images and extract text from them using Optical Character Recognition (OCR) and Artificial Intelligence (AI) technologies.</p>
-                    <p>Our website provides a seamless and efficient way to process images and convert them into editable text. Whether you have scanned documents, handwritten notes, or images with embedded text, our advanced OCR algorithms can accurately recognize and extract the text, making it searchable and editable.</p>
-                    <p>With our intuitive user interface, you can effortlessly upload images and initiate the OCR process. Our AI-powered algorithms analyze the image, identify text regions, and convert them into machine-readable text. The extracted text can then be downloaded or used for further analysis and processing.</p>
-                    <p>Our OCR technology is trained on vast amounts of data, enabling it to handle various languages, fonts, and document layouts. It can handle complex scenarios such as skewed or rotated text, low-quality images, and even handwritten text. Our goal is to provide you with the most accurate and reliable text extraction results.</p>
-                    <p>Additionally, our website offers advanced features such as text recognition from images in different file formats, batch processing for multiple images, and the ability to preserve the original formatting and structure of the extracted text.</p>
-                    <p>Whether you need to digitize printed documents, extract information from images for data analysis, or simply convert images into editable text, our website is your go-to solution. Experience the power of OCR and AI technology and unlock the potential of your images.</p>
-                    <p>To get started, simply click the "Upload" button below to upload your images and let our advanced OCR technology do the rest!</p>
-                    <h2>Why Choose Our Website?</h2>
-                    <ul>
-                        <li>Effortlessly convert images into editable text</li>
-                        <li>Accurate and reliable OCR technology</li>
-                        <li>Support for various languages, fonts, and document layouts</li>
-                        <li>Advanced features for batch processing and preserving formatting</li>
-                        <li>Intuitive user interface for a seamless experience</li>
-                    </ul>
-                    <p>Don't miss out on the convenience and efficiency of extracting text from images. Start using our website today and unlock the full potential of your images!</p>
+                <div>
+                    <h1 className="text-3xl mb-4">Hi, {user?.fullName}</h1>
+                    <div className="bg-yellow-500 rounded-md p-4 mb-4 transform hover:scale-105">
+                        <Suspense fallback={<div>loading...</div>}>
+                            <AnimatedText
+                                inputText={
+                                    "Welcome to our website, where you can easily add images and extract text from them using Optical Character Recognition (OCR) and Artificial Intelligence (AI) technologies. Our website provides a seamless and efficient way to process images and convert them into editable text using our advanced OCR algorithms. The extracted text can then be downloaded or used for further analysis and processing. Click the 'Upload' button below to get started!"
+                                }
+                                randomizeColor={true}
+                                colorStart={'yellow'}
+                                colorEnd={'green'}
+                            />
+                        </Suspense>
+                    </div>
                 </div>
-
             ) : (
                 <>
                     {currentTab === 'upload' && (
-                        <Suspense fallback={<LoadingComponent loadingText={"loading the image uploader"} />}>
+                        <Suspense fallback={<LoadingComponent loadingText={'loading the image uploader'} />}>
                             <MyDropzone />
                         </Suspense>
                     )}
@@ -118,24 +116,24 @@ const MainArea: React.FC<{ activeTab: string }> = ({ activeTab }) => {
                 </>
             )}
 
-            <div className="mt-8">
+            <div className="mt-8 space-x-4">
                 <button
                     className={`px-4 py-2 rounded ${currentTab === 'upload' ? 'bg-yellow-500' : 'bg-gray-500'
-                        }`}
+                        } text-white`}
                     onClick={() => handleTabClick('upload')}
                 >
                     Upload
                 </button>
                 <button
                     className={`px-4 py-2 rounded ${currentTab === 'settings' ? 'bg-yellow-500' : 'bg-gray-500'
-                        }`}
+                        } text-white`}
                     onClick={() => handleTabClick('settings')}
                 >
                     Settings
                 </button>
                 <button
                     className={`px-4 py-2 rounded ${currentTab === 'history' ? 'bg-yellow-500' : 'bg-gray-500'
-                        }`}
+                        } text-white`}
                     onClick={() => handleTabClick('history')}
                 >
                     History

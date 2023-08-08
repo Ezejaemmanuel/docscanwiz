@@ -2,27 +2,26 @@ import { prisma } from "./../../lib/prisma";
 
 type AddImageProps = {
     filepath: string;
-    size: number;
-    userEmail: string;
+    filesize: number;
+    email: string;
+    filename: string;
 };
 
-async function addImageToDatabase({ filepath, size, userEmail }: AddImageProps) {
+async function addImageToDatabase({ filepath, filesize, email, filename }: AddImageProps) {
     try {
         const user = await prisma.user.findUnique({
-            where: { email: userEmail },
+            where: { email: email },
         });
 
         if (!user) {
-            throw new Error(`User with email ${userEmail} not found`);
+            throw new Error(`User with email ${email} not found`);
         }
-
-        const imageUrl = `https://example.com/${filepath}`; // Replace with your actual image URL
 
         const image = await prisma.image.create({
             data: {
-                url: imageUrl,
-                size: size,
-                filename: "yes",
+                url: filepath,
+                size: filesize,
+                filename: filename,
                 width: 100,
                 height: 100,
                 user: {
@@ -32,6 +31,7 @@ async function addImageToDatabase({ filepath, size, userEmail }: AddImageProps) 
         });
 
         console.log("Image added to database:", image);
+        return user;
     } catch (error) {
         console.error("Error adding image to database:", error);
     } finally {

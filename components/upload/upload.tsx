@@ -1,10 +1,15 @@
 "use client";
+import getCurrentUser from '@/app/actions/getCurrentUser';
+import SupabaseAcceptFile from '@/app/actions/supabaseAcceptFile';
+import { error } from 'console';
 import React, { useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
-
+import Image from 'next/image';
 interface MyDropzoneProps { }
 
-const MyDropzone: React.FC<MyDropzoneProps> = () => {
+const MyDropzone: React.FC<MyDropzoneProps> = async () => {
+    const email = await getCurrentUser();
+
     const [filePreviews, setFilePreviews] = useState<string[]>([]);
     const [acceptedFiles, setAcceptedFiles] = useState<File[]>([]);
 
@@ -20,23 +25,52 @@ const MyDropzone: React.FC<MyDropzoneProps> = () => {
         },
         maxFiles: 10,
         onDrop: (files: File[]) => {
-            setAcceptedFiles((prevAcceptedFiles) => [...prevAcceptedFiles, ...files]);
-            handleFilePreview(files);
+            const validFiles = files.filter((file) => file.size <= 4 * 1024 * 1024);
+            setAcceptedFiles((prevAcceptedFiles) => [...prevAcceptedFiles, ...validFiles]);
+            handleFilePreview(validFiles);
         },
     });
 
-    const handleAddToDatabase = () => {
-        // Perform actions to add all the files to the database
-        acceptedFiles.forEach((file) => {
-            if (file.size <= 4 * 1024 * 1024) {
-                // Do something with each file, such as uploading or processing
-                console.log('Accepted file:', file);
-                // Add the file to the database
-                // ...
-            } else {
-                console.log('File size exceeds the maximum limit');
+    // const handleAddToDatabase = async () => {
+    //     // Perform actions to add all the files to the database
+    //     acceptedFiles.forEach(async (file) => {
+    //         if (file.size <= 4 * 1024 * 1024) {
+    //             // Do something with each file, such as uploading or processing
+    //             if (typeof email == "string") {
+    //                 await SupabaseAcceptFile(file, email);
+
+    //             } else {
+    //                 throw error;
+    //             }
+    //             console.log('Accepted file:', file);
+    //             // Add the file to the database
+    //             // ...
+    //         } else {
+    //             console.log('File size exceeds the maximum limit');
+    //         }
+    //     });
+    // };
+    const handleAddToDatabase = async () => {
+        try {
+            // Perform actions to add all the files to the database
+            for (const file of acceptedFiles) {
+                if (file.size <= 4 * 1024 * 1024) {
+                    // Do something with each file, such as uploading or processing
+                    if (typeof email == "string") {
+                        await SupabaseAcceptFile(file, email);
+                    } else {
+                        throw new Error("Email is not a string");
+                    }
+                    console.log('Accepted file:', file);
+                    // Add the file to the database
+                    // ...
+                } else {
+                    console.log('File size exceeds the maximum limit');
+                }
             }
-        });
+        } catch (error) {
+            console.error("Error adding files to the database:", error);
+        }
     };
 
     useEffect(() => {
@@ -54,10 +88,12 @@ const MyDropzone: React.FC<MyDropzoneProps> = () => {
                 </p>
                 <div className="flex flex-wrap justify-center mt-4">
                     {filePreviews.map((fileURL) => (
-                        <img
+                        <Image
                             key={fileURL}
                             src={fileURL}
                             alt="Preview"
+                            width={50}
+                            height={50}
                             className="w-32 h-32 object-cover m-2 rounded-lg sm:w-48 sm:h-48"
                         />
                     ))}
