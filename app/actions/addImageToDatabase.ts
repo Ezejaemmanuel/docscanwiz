@@ -24,16 +24,12 @@ async function addImageToDatabase({ filepath, size, userEmail }: AddImageProps) 
                 size: size,
                 filename: "yes",
                 width: 100,
-                height   Int
-
-
+                height: 100,
                 user: {
                     connect: { id: user.id },
                 },
             },
         });
- url      String // link to image in bucket
-  size     Int // in bytes
 
         console.log("Image added to database:", image);
     } catch (error) {
