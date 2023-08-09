@@ -60,10 +60,10 @@ const SignInComponent = dynamic(() => import('./YouAreNotSignedIn'));
 const MyDropzone = dynamic(() => import('./upload/upload'));
 const AnimatedText = dynamic(() => import('./AnimatedText'));
 
-const MainArea: React.FC<{ activeTab: string }> = async ({ activeTab }) => {
+const MainArea: React.FC<{ activeTab: string }> = ({ activeTab }) => {
     const { isLoaded, isSignedIn, user } = useUser();
     const [currentTab, setCurrentTab] = useState(activeTab);
-    const confirmed = await confirmOrCreate();
+    const confirmed = confirmOrCreate();
     if (!isLoaded) {
         return <LoadingComponent loadingText={'loading user info'} />;
     }
