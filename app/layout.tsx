@@ -35,20 +35,21 @@ export default function RootLayout({ children }: Props) {
 
   return (
     <ClerkProvider>
-    <html lang="en">
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <div className='dark:bg-black bg-slate-50'>
-            <div className="fixed top-0 left-0 right-0 z-10">
-              <Navbar />
+      <html lang="en">
+        <body className={inter.className}>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            <div className='dark:bg-black bg-slate-50'>
+              <div className="fixed top-0 left-0 right-0 z-10">
+                <Navbar />
+              </div >
+              <div className='pt-24'>
+                {children}
+              </div>
+              <ContactUs />
             </div>
+          </ThemeProvider>
 
-            {children}
-            <ContactUs />
-          </div>
-        </ThemeProvider>
-
-      </body>
+        </body>
       </html>
     </ClerkProvider>
   );

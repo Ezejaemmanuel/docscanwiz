@@ -1,11 +1,9 @@
 import React, { FC } from 'react'
 import AsideDashboardPage from './aside';
+import { confirmOrCreate } from '../actions/connectAndConfirmClerkAndPrisma';
 
 const Dashboard: FC = async () => {
-    const response = await fetch('/api/confrimOrCreate');
-    const data = await response.json();
-    const { user } = data;
-
+    const user = await confirmOrCreate();
     if (user) {
         return (
             <>
@@ -21,3 +19,27 @@ const Dashboard: FC = async () => {
 }
 
 export default Dashboard;
+
+// //posible alternaitive
+// import React, { FC } from 'react';
+// import AsideDashboardPage from './aside';
+// import { confirmOrCreate } from '../actions/connectAndConfirmClerkAndPrisma';
+
+// const Dashboard: FC = () => {
+//     const handleUser = async () => {
+//         try {
+//             const user = await confirmOrCreate();
+//             const userExists = !!user;
+//             return userExists;
+//         } catch (error) {
+//             console.error(error);
+//             return false;
+//         }
+//     }
+
+//     return (
+//         <AsideDashboardPage user={handleUser()} />
+//     );
+// }
+
+// export default Dashboard;
