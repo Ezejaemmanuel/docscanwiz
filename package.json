@@ -49,8 +49,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^13.4.12",
-    "cross-env": "^7.0.3",
+    "encoding": "^0.1.13",
     "prisma": "^5.1.1"
   }
 }
