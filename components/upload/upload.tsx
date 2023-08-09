@@ -139,7 +139,6 @@
 
 // MyDropzone.tsx
 "use client";
-import getCurrentUser from '@/app/actions/getCurrentUser';
 import React, { useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import Image from 'next/image';
@@ -148,7 +147,6 @@ import handleAddToDatabase from '@/app/actions/handledatabase';
 interface MyDropzoneProps { }
 
 const MyDropzone: React.FC<MyDropzoneProps> = () => {
-    const email = getCurrentUser() as unknown as string;
 
     const [filePreviews, setFilePreviews] = useState<string[]>([]);
     const [acceptedFiles, setAcceptedFiles] = useState<File[]>([]);
@@ -224,7 +222,7 @@ const MyDropzone: React.FC<MyDropzoneProps> = () => {
                 {acceptedFiles.length} {acceptedFiles.length === 1 ? 'file' : 'files'} added
             </p>
             <button
-                onClick={() => handleAddToDatabase(acceptedFiles, email)}
+                onClick={() => handleAddToDatabase(acceptedFiles)}
                 className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
                 Scan and extract text

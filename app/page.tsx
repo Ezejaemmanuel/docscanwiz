@@ -3,7 +3,6 @@ import React from 'react';
 
 import WhyChooseUs from '@/components/WhyChooseUs';
 import HeroSection from '@/components/header';
-import Image from 'next/image';
 import DocumentExtractor from '@/components/WhatToDo';
 
 const Home: React.FC = () => {

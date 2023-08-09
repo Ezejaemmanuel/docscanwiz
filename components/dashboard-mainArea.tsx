@@ -54,7 +54,6 @@ import dynamic from 'next/dynamic';
 import LoadingComponent from './aboutToLoad';
 import Image from 'next/image';
 import { Suspense, useState } from 'react';
-import { confirmOrCreate } from '@/app/actions/connectAndConfirmClerkAndPrisma';
 
 const SignInComponent = dynamic(() => import('./YouAreNotSignedIn'));
 const MyDropzone = dynamic(() => import('./upload/upload'));
@@ -63,12 +62,11 @@ const AnimatedText = dynamic(() => import('./AnimatedText'));
 const MainArea: React.FC<{ activeTab: string }> = ({ activeTab }) => {
     const { isLoaded, isSignedIn, user } = useUser();
     const [currentTab, setCurrentTab] = useState(activeTab);
-    const confirmed = confirmOrCreate();
     if (!isLoaded) {
         return <LoadingComponent loadingText={'loading user info'} />;
     }
 
-    if (!isSignedIn || !confirmed) {
+    if (!isSignedIn) {
         return <SignInComponent />;
     }
 

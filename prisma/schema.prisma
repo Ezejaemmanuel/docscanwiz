@@ -15,7 +15,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  username String    @unique
+  username String
   email    String    @unique
   comments Comment[]
   Image    Image[]
@@ -32,15 +32,15 @@ model Comment {
 }
 
 model Image {
-  id Int @id @default(autoincrement())
-
-  url      String // link to image in bucket
-  filename String
-  size     Int // in bytes
-  width    Int
-  height   Int
-  user     User   @relation(fields: [userId], references: [id])
-  userId   Int
+  id        Int    @id @default(autoincrement())
+  generalId String
+  url       String // link to image in bucket
+  filename  String
+  size      Int // in bytes
+  width     Int
+  height    Int
+  user      User   @relation(fields: [userId], references: [id])
+  userId    Int
 
   // metadata
   createdAt   DateTime @default(now())
