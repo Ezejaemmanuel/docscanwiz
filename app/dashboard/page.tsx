@@ -4,6 +4,7 @@ import { confirmOrCreate } from '../actions/connectAndConfirmClerkAndPrisma';
 
 const Dashboard: FC = async () => {
     const user = await confirmOrCreate();
+    console.log("User in Dashboard: ", user);  // Log user value in Dashboard
     if (user) {
         return (
             <>
@@ -19,27 +20,3 @@ const Dashboard: FC = async () => {
 }
 
 export default Dashboard;
-
-// //posible alternaitive
-// import React, { FC } from 'react';
-// import AsideDashboardPage from './aside';
-// import { confirmOrCreate } from '../actions/connectAndConfirmClerkAndPrisma';
-
-// const Dashboard: FC = () => {
-//     const handleUser = async () => {
-//         try {
-//             const user = await confirmOrCreate();
-//             const userExists = !!user;
-//             return userExists;
-//         } catch (error) {
-//             console.error(error);
-//             return false;
-//         }
-//     }
-
-//     return (
-//         <AsideDashboardPage user={handleUser()} />
-//     );
-// }
-
-// export default Dashboard;

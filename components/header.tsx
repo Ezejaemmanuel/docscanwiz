@@ -9,6 +9,7 @@ import Scanning from '../public/scanning.json'
 import dynamic from 'next/dynamic';
 import { CircleIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
+import { SignInButton, SignUpButton } from '@clerk/nextjs';
 const AnimatedText = dynamic(
     () => import('./AnimatedText'),
     {
@@ -41,15 +42,24 @@ const HeroSection: React.FC = () => {
                     <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
                         <AnimatedText inputText={'DocScanWiz is a platform that allows you to easily extract text and data from documents, images, PDFs, and other files. Our advanced OCR technology can digitize your paperwork in seconds. Simply upload your documents and let DocScanWiz do the hard work for you. Our system is fast, accurate, and secure - perfect for managing all your business documents.'} randomizeColor={true} colorStart={'yellow'} colorEnd={'purple'} />
                     </p>
-                    <div>
+                    <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                         <Link href={"/dashboard"} >
-                            <Button className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                            <Button className="inline-flex items-center justify-center w-full sm:w-auto px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                                 <CircleIcon className="mr-2 h-4 w-4" /> Get Started
                             </Button>
-
-
                         </Link>
+                        <SignInButton mode="modal">
+                            <Button className="w-full sm:w-auto px-5 py-3 text-white bg-blue-500 hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800">
+                                Sign In
+                            </Button>
+                        </SignInButton>
+                        <SignUpButton mode="modal">
+                            <Button className="w-full sm:w-auto px-5 py-3 text-white bg-green-500 hover:bg-green-600 dark:bg-green-700 dark:hover:bg-green-800">
+                                Sign Up
+                            </Button>
+                        </SignUpButton>
                     </div>
+
                 </div>
             </div>
         </section>
