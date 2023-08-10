@@ -70,6 +70,7 @@ import boxes from './boxes.json';
 
 export default async function WhyChooseUs() {
 
+
     return (
 
         <section className="py-8 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
