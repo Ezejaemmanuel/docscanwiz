@@ -9,7 +9,7 @@ import Scanning from '../public/scanning.json'
 import dynamic from 'next/dynamic';
 import { CircleIcon, FaceIcon, AvatarIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
-import { SignInButton, SignUpButton } from '@clerk/nextjs';
+import { SignInButton, SignUpButton, SignedOut } from '@clerk/nextjs';
 const AnimatedText = dynamic(
     () => import('./AnimatedText'),
     {
@@ -59,22 +59,26 @@ const HeroSection: React.FC = () => {
                             </Button>
                         </SignUpButton>
                     </div> */}
+
                     <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+
                         <Link href={"/dashboard"} >
                             <Button className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-4 text-base font-medium text-center text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-500">
                                 <CircleIcon className="mr-2 h-4 w-4" /> Get Started
                             </Button>
                         </Link>
-                        <SignInButton mode="modal">
-                            <Button className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-4 text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500">
-                                <FaceIcon className="mr-2 h-4 w-4" /> Sign In
-                            </Button>
-                        </SignInButton>
-                        <SignUpButton mode="modal">
-                            <Button className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-4 text-white bg-green-600 hover:bg-green-700 dark:bg-green-500">
-                                <AvatarIcon className="mr-2 h-4 w-4" /> Sign Up // replace AnotherIcon with the icon you want
-                            </Button>
-                        </SignUpButton>
+                        <SignedOut>
+                            <SignInButton mode="modal">
+                                <Button className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-4 text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500">
+                                    <FaceIcon className="mr-2 h-4 w-4" /> Sign In
+                                </Button>
+                            </SignInButton>
+                            <SignUpButton mode="modal">
+                                <Button className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-4 text-white bg-green-600 hover:bg-green-700 dark:bg-green-500">
+                                    <AvatarIcon className="mr-2 h-4 w-4" /> Sign Up // replace AnotherIcon with the icon you want
+                                </Button>
+                            </SignUpButton>
+                        </SignedOut>
                     </div>
 
                 </div>
