@@ -1,4 +1,5 @@
 "use client";
+import SignInComponent from "@/components/YouAreNotSignedIn";
 import MainArea from "@/components/dashboard-mainArea";
 import Sidebar from "@/components/sidebar/dashboard-sidebar";
 import React, { useState } from "react";
@@ -9,7 +10,7 @@ const AsideDashboardPage: React.FC<IncomingBool> = ({ user }) => {
     console.log("Rendering AsideDashboardPage with user: ", user);  // Log when rendering with user value
     const [activeTab, setActiveTab] = useState("home");
     if (!user) {
-        return <div>this is an error</div>
+        return <SignInComponent />
     }
 
     return (

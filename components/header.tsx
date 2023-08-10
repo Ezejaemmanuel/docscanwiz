@@ -70,12 +70,12 @@ const HeroSection: React.FC = () => {
                         <SignedOut>
                             <SignInButton mode="modal">
                                 <Button className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-4 text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500">
-                                    <FaceIcon className="mr-2 h-4 w-4" /> Sign In
+                                    Sign In
                                 </Button>
                             </SignInButton>
                             <SignUpButton mode="modal">
                                 <Button className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-4 text-white bg-green-600 hover:bg-green-700 dark:bg-green-500">
-                                    <AvatarIcon className="mr-2 h-4 w-4" /> Sign Up // replace AnotherIcon with the icon you want
+                                    Sign Up
                                 </Button>
                             </SignUpButton>
                         </SignedOut>
