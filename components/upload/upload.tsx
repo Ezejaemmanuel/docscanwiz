@@ -176,7 +176,7 @@ const MyDropzone: React.FC<MyDropzoneProps> = () => {
     }, [filePreviews]);
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-black">
             <div {...getRootProps()} className="p-4 m-4 border-2 border-dashed rounded-lg cursor-pointer">
                 <input {...getInputProps()} />
                 <p className="text-center">
