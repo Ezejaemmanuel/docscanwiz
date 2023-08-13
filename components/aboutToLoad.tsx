@@ -2,7 +2,7 @@
 import React from 'react';
 
 interface LoadingProps {
-    loadingText?: string;
+    loadingText: string;
 }
 
 const LoadingComponent: React.FC<LoadingProps> = ({ loadingText }) => {
