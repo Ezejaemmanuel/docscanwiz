@@ -25,11 +25,11 @@ const MainArea: React.FC<{ activeTab: string }> = ({ activeTab }) => {
     };
 
     return (
-        <main className="flex flex-col justify-center items-center w-full md:w-4/5 pt-40 dark:bg-black">
+        <main className="flex flex-col justify-center items-center w-full  dark:bg-black">
             {currentTab === 'home' ? (
                 <div>
                     <h1 className="text-3xl mb-4">Hi, {user?.fullName}</h1>
-                    <div className="bg-gray-500 rounded-md p-4 mb-4 transform hover:scale-105">
+                    <div className="dark:bg-black rounded-md p-4 mb-4 transform hover:scale-105">
                         <Suspense fallback={<div>loading...</div>}>
                             <AnimatedText
                                 inputText={
