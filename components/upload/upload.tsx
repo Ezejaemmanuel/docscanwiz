@@ -143,6 +143,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import Image from 'next/image';
 import handleAddToDatabase from '@/app/actions/handledatabase';
+import Link from 'next/link';
 
 interface MyDropzoneProps { }
 
@@ -206,7 +207,7 @@ const MyDropzone: React.FC<MyDropzoneProps> = () => {
                 <div className="mt-4">
                     <h2 className="text-lg font-bold">File URLs:</h2>
                     {filePreviews.map((fileURL) => (
-                        <a
+                        <Link
                             key={fileURL}
                             href={fileURL}
                             target="_blank"
@@ -214,7 +215,7 @@ const MyDropzone: React.FC<MyDropzoneProps> = () => {
                             className="text-blue-500 hover:underline"
                         >
                             {fileURL}
-                        </a>
+                        </Link>
                     ))}
                 </div>
             )}
