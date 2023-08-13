@@ -4,12 +4,24 @@ import getQueryClient from '@/utils/getQueryClient';
 import { Hydrate, dehydrate } from '@tanstack/react-query';
 
 
+// async function getUser() {
+//     const res = await fetch("api/confirmOrCreate");
+//     const user = await res.json();
+//     console.log("this is the res", res);
+//     console.log("this is the user", user);
+//     return user
+// }
 async function getUser() {
-    const res = await fetch("api/confirmOrCreate");
-    const user = await res.json();
-    console.log("this is the res", res);
-    console.log("this is the user", user);
-    return user
+    try {
+        const res = await fetch('api/confirmOrCreate');
+        if (!res.ok) {
+            throw new Error('Error fetching user data');
+        }
+        const user = await res.json();
+        return user;
+    } catch (error: any) {
+        throw new Error(error.message);
+    }
 }
 const Dashboard: FC = async () => {
     const queryClient = getQueryClient();

@@ -49,18 +49,30 @@
 import dynamic from 'next/dynamic';
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
+import ErrorDisplayComponent from '@/components/ErrorInComponent';
 
 const SignInComponent = dynamic(() => import("@/components/YouAreNotSignedIn"));
 const LoadingComponent = dynamic(() => import("@/components/aboutToLoad"));
 const MainArea = dynamic(() => import("@/components/dashboard-mainArea"));
 const Sidebar = dynamic(() => import("@/components/sidebar/dashboard-sidebar"));
 
+// async function getUser() {
+//     const res = await fetch("api/confirmOrCreate");
+//     const user = await res.json();
+//     return user
+// }
 async function getUser() {
-    const res = await fetch("api/confirmOrCreate");
-    const user = await res.json();
-    return user
+    try {
+        const res = await fetch('api/confirmOrCreate');
+        if (!res.ok) {
+            throw new Error('Error fetching user data');
+        }
+        const user = await res.json();
+        return user;
+    } catch (error: any) {
+        throw new Error(error.message);
+    }
 }
-
 const AsideDashboardPage: React.FC = () => {
     const [activeTab, setActiveTab] = useState("home");
 
@@ -73,12 +85,14 @@ const AsideDashboardPage: React.FC = () => {
         return <LoadingComponent loadingText={"loading user"} />
     }
 
-    if (isError || !data) {
+    if (isError) {
         // Consider logging the error or displaying it to the user
-        alert(data);
+
+        return <ErrorDisplayComponent errorMessage={"there is an error somehwere"} />
+    }
+    if (!data) {
         return <SignInComponent />
     }
-
     return (
         <div className="flex flex-col">
             <Sidebar setActiveTab={setActiveTab} />
