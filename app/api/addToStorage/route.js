@@ -53,7 +53,8 @@ export async function POST(request) {
                     }
                 } catch (error) {
                     if (error instanceof Error) {
-                        return { error: `Error uploading file: ${error.message}` };
+                        return NextResponse.json({ error: `Error uploading file: ${error.message}` }, { status: 500 });
+
                     }
                 }
                 return {
