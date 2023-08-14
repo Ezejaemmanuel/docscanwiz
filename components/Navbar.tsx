@@ -68,6 +68,7 @@ function NavBar() {
                             <DismissableModal />
                         </div>
 
+
                         <ModeToggle />
                         <UserButtonHere />
 
