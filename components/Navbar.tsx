@@ -72,9 +72,6 @@ function NavBar() {
                         <UserButtonHere />
 
                     </div>
-
-
-
                 </div>
             </div>
 
