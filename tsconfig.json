@@ -34,7 +34,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/api/addToStorage/route.js"
+    "app/api/addToStorage/route.ts"
   ],
   "exclude": [
     "node_modules"
