@@ -91,7 +91,9 @@ const AsideDashboardPage: React.FC = () => {
     if (isLoading) {
         return <LoadingComponent loadingText={"loading user"} />
     }
-
+    if (!data) {
+        return <SignInComponent />
+    }
     if (isError) {
         let errorMessage = 'An error occurred';
         if (error instanceof Error) {
@@ -100,9 +102,7 @@ const AsideDashboardPage: React.FC = () => {
         return <ErrorDisplayComponent errorMessage={errorMessage} />
     }
 
-    if (!data) {
-        return <SignInComponent />
-    }
+
 
     return (
         <div className="flex flex-col">
