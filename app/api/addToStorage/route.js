@@ -146,7 +146,7 @@ import supabase from '@/lib/supabase';
 import { NextRequest, NextResponse } from 'next/server';
 import { v4 as uuidv4 } from "uuid";
 import { currentUser } from '@clerk/nextjs';
-export default async function getCurrentUser() {
+async function getCurrentUser() {
     const user = await currentUser();
     console.log("1...this the current user", user);
     if (!user) return null;
