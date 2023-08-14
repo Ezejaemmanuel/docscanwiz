@@ -56,24 +56,26 @@ async function upsertUser(email: string, username: string): Promise<User> {
 }
 
 export async function GET() {
-    const fallbackUsername = 'Anonymous';
-    const user = await currentUser();
+    //const fallbackUsername = 'Anonymous';
+    const username = await currentUser().then(user => user?.username);
+    const email = await currentUser().then(email => email?.emailAddresses[0].emailAddress)
 
-    if (!user) {
+
+    if (!username) {
         return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    const emailObj = user.emailAddresses[0]?.emailAddress;
+    // const emailObj = user.emailAddresses[0]?.emailAddress;
 
-    if (!emailObj) {
+    if (!email) {
         return NextResponse.json({ error: 'Email address not found' }, { status: 400 });
     }
 
-    const emailStringified = JSON.stringify(emailObj);
-    const username = user.username || fallbackUsername;
+    // const emailStringified = JSON.stringify(emailObj);
+    // const username = user.username || fallbackUsername;
 
     try {
-        const upsertedUser = await upsertUser(emailStringified, username);
+        const upsertedUser = await upsertUser(email, username);
         return NextResponse.json(upsertedUser);
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
