@@ -1,6 +1,6 @@
 
 // import React, { useState, useEffect } from "react";
-// import { useDropzone, FileWithPath } from "react-dropzone";
+// import { useDropzone, File } from "react-dropzone";
 // import Image from "next/image";
 // import LoadingComponent from "../aboutToLoad";
 // import ErrorDisplayComponent from "../ErrorInComponent";
@@ -12,11 +12,11 @@
 
 // const MyDropzone: React.FC<MyDropzoneProps> = () => {
 //     const [filePreviews, setFilePreviews] = useState<string[]>([]);
-//     const [acceptedFiles, setAcceptedFiles] = useState<FileWithPath[]>([]);
+//     const [acceptedFiles, setAcceptedFiles] = useState<File[]>([]);
 //     const [reachedMaxFiles, setReachedMaxFiles] = useState(false);
 //     const isUser = useAuth().isSignedIn;
 
-//     const handleFilePreview = (files: FileWithPath[]) => {
+//     const handleFilePreview = (files: File[]) => {
 //         const fileURLs = files.map((file) => URL.createObjectURL(file));
 //         setFilePreviews(fileURLs);
 //     };
@@ -28,7 +28,7 @@
 //         },
 //         maxSize: 4 * 1024 * 1024,
 //         maxFiles: 5,
-//         onDrop: (files: FileWithPath[]) => {
+//         onDrop: (files: File[]) => {
 //             const validFiles = files.filter((file) => file.size <= 4 * 1024 * 1024);
 //             setAcceptedFiles((prevAcceptedFiles) => [...prevAcceptedFiles, ...validFiles]);
 //             handleFilePreview(validFiles);
@@ -44,7 +44,7 @@
 //         };
 //     }, [filePreviews]);
 
-//     const sendFilesToDatabase = async (data: FileWithPath[]) => {
+//     const sendFilesToDatabase = async (data: File[]) => {
 //         const formData = new FormData();
 
 //         if (data && isUser) {
@@ -146,7 +146,7 @@
 // export default MyDropzone;
 "use client";
 import React, { useState, useEffect } from "react";
-import { useDropzone, FileWithPath } from "react-dropzone";
+import { useDropzone } from "react-dropzone";
 import Image from "next/image";
 import LoadingComponent from "../aboutToLoad";
 import ErrorDisplayComponent from "../ErrorInComponent";
@@ -158,13 +158,13 @@ interface MyDropzoneProps { }
 
 const MyDropzone: React.FC<MyDropzoneProps> = () => {
     const [filePreviews, setFilePreviews] = useState<string[]>([]);
-    const [acceptedFiles, setAcceptedFiles] = useState<FileWithPath[]>([]);
+    const [acceptedFiles, setAcceptedFiles] = useState<File[]>([]);
     const [reachedMaxFiles, setReachedMaxFiles] = useState(false);
     const isUser = useAuth().isSignedIn;
 
-    const handleFilePreview = (files: FileWithPath[]) => {
+    const handleFilePreview = (files: File[]) => {
         const fileURLs = files.map((file) => URL.createObjectURL(file));
-        setFilePreviews(fileURLs);
+        setFilePreviews((prevAcceptedFiles) => [...prevAcceptedFiles, ...fileURLs]);
     };
 
     const { getRootProps, getInputProps, isDragActive, isDragReject } = useDropzone({
@@ -174,7 +174,7 @@ const MyDropzone: React.FC<MyDropzoneProps> = () => {
         },
         maxSize: 4 * 1024 * 1024,
         maxFiles: 5,
-        onDrop: (files: FileWithPath[]) => {
+        onDrop: (files: File[]) => {
             const validFiles = files.filter((file) => file.size <= 4 * 1024 * 1024);
             setAcceptedFiles((prevAcceptedFiles) => [...prevAcceptedFiles, ...validFiles]);
             handleFilePreview(validFiles);
@@ -190,7 +190,7 @@ const MyDropzone: React.FC<MyDropzoneProps> = () => {
         };
     }, [filePreviews]);
 
-    const sendFilesToDatabase = async (data: FileWithPath[]) => {
+    const sendFilesToDatabase = async (data: File[]) => {
         const formData = new FormData();
 
         if (data && isUser) {
