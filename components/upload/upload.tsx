@@ -192,7 +192,7 @@ const MyDropzone: React.FC<MyDropzoneProps> = () => {
     const [filePreviews, setFilePreviews] = useState<string[]>([]);
     const [acceptedFiles, setAcceptedFiles] = useState<File[]>([]);
     const [reachedMaxFiles, setReachedMaxFiles] = useState(false);
-
+    const isUser = useAuth().isSignedIn;
     const handleFilePreview = useCallback((files: File[]) => {
         const newFileURLs = files.map((file) => URL.createObjectURL(file));
         setFilePreviews((prevFilePreviews) => [...prevFilePreviews, ...newFileURLs]);
@@ -225,7 +225,7 @@ const MyDropzone: React.FC<MyDropzoneProps> = () => {
 
     const sendFilesToDatabase = async (data: File[]) => {
         //const email = await getCurrentUser() as unknown as string;
-        const isUser = useAuth().isSignedIn;
+
         const formData = new FormData();
 
         if (data && isUser) {
