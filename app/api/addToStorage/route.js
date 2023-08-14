@@ -145,8 +145,9 @@ import { prisma } from '@/lib/prisma';
 import supabase from '@/lib/supabase';
 import { NextRequest, NextResponse } from 'next/server';
 import { v4 as uuidv4 } from "uuid";
-import { currentUser } from '@clerk/nextjs';
-// async function getCurrentUser() {
+//import { currentUser } from '@clerk/nextjs';
+import { auth } from "@clerk/nextjs";
+//  async function getCurrentUser() {
 //     const user = await currentUser();
 //     console.log("1...this the current user", user);
 //     if (!user) return null;
@@ -161,15 +162,7 @@ import { currentUser } from '@clerk/nextjs';
 
 export async function POST(request) {
     try {
-        const user = await currentUser();
-        console.log("1...this the current user", user);
-        if (!user) return null;
-        const emailAdrr = user.emailAddresses[0];
-        console.log("2...this the user.emailAddresses[0];", emailAdrr);
-
-        const email = emailAdrr.toString();
-        console.log("2...this the user.emailAddresses[0];", emailAdrr);
-        console.log("this is the type of the email that is about to be returned", typeof (email))
+        const email = await auth.email;
         console.log(`Email: ${email}`);
         if (!email) {
             return NextResponse.json({ error: "user not available" }, { status: 404 });
