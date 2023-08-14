@@ -40,7 +40,8 @@
 import { NextResponse } from 'next/server';
 import { User } from '@prisma/client';
 import { prisma } from './../../../lib/prisma';
-import { currentUser } from '@clerk/nextjs';
+//import { currentUser } from '@clerk/nextjs';
+import { auth } from "@clerk/nextjs";
 
 async function upsertUser(email: string, username: string): Promise<User> {
     try {
@@ -56,24 +57,25 @@ async function upsertUser(email: string, username: string): Promise<User> {
 }
 
 export async function GET() {
+    const user = auth().user?.username;
+    const userAddress = auth().user?.emailAddresses[0].emailAddress;
     const fallbackUsername = 'Anonymous';
-    const user = await currentUser();
+    //const user = await currentUser();
 
     if (!user) {
         return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    const emailObj = user.emailAddresses[0]?.emailAddress;
 
-    if (!emailObj) {
+    if (!userAddress) {
         return NextResponse.json({ error: 'Email address not found' }, { status: 400 });
     }
 
-    const emailStringified = JSON.stringify(emailObj);
-    const username = user.username || fallbackUsername;
+    //const emailStringified = JSON.stringify(emailObj);
+    const username = user || fallbackUsername;
 
     try {
-        const upsertedUser = await upsertUser(emailStringified, username);
+        const upsertedUser = await upsertUser(userAddress, username);
         return NextResponse.json(upsertedUser);
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });

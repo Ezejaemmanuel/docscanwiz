@@ -162,7 +162,7 @@ import { auth } from "@clerk/nextjs";
 
 export async function POST(request) {
     try {
-        const email = await auth.email;
+        const email = auth().user?.emailAddresses[0].emailAddress
         console.log(`Email: ${email}`);
         if (!email) {
             return NextResponse.json({ error: "user not available" }, { status: 404 });

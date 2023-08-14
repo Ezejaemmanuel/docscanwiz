@@ -172,10 +172,11 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import Image from "next/image";
 import Link from "next/link";
-import getCurrentUser from '@/app/actions/getCurrentUser';
+//import getCurrentUser from '@/app/actions/getCurrentUser';
 import LoadingComponent from "../aboutToLoad";
 import ErrorDisplayComponent from "../ErrorInComponent";
 import { useMutation } from "@tanstack/react-query";
+import { useAuth } from "@clerk/nextjs";
 interface MyDropzoneProps { }
 interface ErrorProps {
     message: string | undefined;
@@ -223,9 +224,11 @@ const MyDropzone: React.FC<MyDropzoneProps> = () => {
     }, [filePreviews]);
 
     const sendFilesToDatabase = async (data: File[]) => {
-        const email = await getCurrentUser() as unknown as string;
+        //const email = await getCurrentUser() as unknown as string;
+        const isUser = useAuth().isSignedIn;
         const formData = new FormData();
-        if (typeof email == "string") {
+
+        if (data && isUser) {
             for (const file of data) {
                 if (file.size <= 4 * 1024 * 1024) {
                     formData.append('files', file);
@@ -234,7 +237,7 @@ const MyDropzone: React.FC<MyDropzoneProps> = () => {
                 }
             }
         } else {
-            throw new Error("Email is not a string");
+            throw new Error("File not found or User not Found");
         }
 
         const res = await fetch("api/addToStorage", {
