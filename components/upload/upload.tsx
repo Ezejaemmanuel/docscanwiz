@@ -136,16 +136,15 @@
 //             </form>
 //         </div>);
 // };
-
-// export default MyDropzone;
 "use client";
+// export default MyDropzone;
 import React, { useRef, useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useAuth } from "@clerk/nextjs";
-//import SignInComponent from '../YouAreNotSignedIn';
+// import SignInComponent from '../YouAreNotSignedIn';
 import Image from 'next/image';
-//import { useMutation } from '@tanstack/react-query';
-//import ErrorDisplayComponent from '../ErrorInComponent';
+// import { useMutation } from '@tanstack/react-query';
+// import ErrorDisplayComponent from '../ErrorInComponent';
 import { createWorker } from 'tesseract.js';
 
 const MyDropzone: React.FC = () => {
@@ -181,6 +180,7 @@ const MyDropzone: React.FC = () => {
     useEffect(() => {
         workerRef.current = createWorker({
             logger: (m: any) => {
+                console.log('OCR Logger:', m);
                 if (m.status === 'recognizing text') {
                     setProgress(m.progress);
                     setProgressLabel(m.status);
@@ -193,9 +193,10 @@ const MyDropzone: React.FC = () => {
                 worker.terminate();
             }
         };
-    }, []);
+    }, [worker]);
 
     const handleExtract = useCallback(async () => {
+        console.log('Starting OCR extraction');
         setProgress(0);
         setProgressLabel('starting');
         await worker.load();
@@ -208,7 +209,13 @@ const MyDropzone: React.FC = () => {
             text += data.text + '\n';
         }
         setOcrText(text);
-    }, [filePreviews]);
+        console.log('OCR extraction complete');
+    }, [filePreviews, worker]);
+
+    console.log('filePreviews:', filePreviews);
+    console.log('ocrText:', ocrText);
+    console.log('progressLabel:', progressLabel);
+    console.log('progress:', progress);
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen dark:bg-black">
