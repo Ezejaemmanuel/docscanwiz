@@ -186,6 +186,10 @@ const MyDropzone: React.FC = () => {
     });
 
     const performOCR = useCallback(async () => {
+        if (!worker) {
+            console.error("Worker is not ready");
+            return;
+        }
         let text = '';
         for (const fileURL of filePreviews) {
             const blob = await fetch(fileURL).then((response) => response.blob());
