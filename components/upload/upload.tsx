@@ -349,7 +349,8 @@ const Home = () => {
                     >
                         {mutation.isLoading ? "Sending..." : "Send to Database"}
                     </button>
-                    {mutation.isError && <div>An error occurred:  some where </div>}
+                    {mutation.isError && <div>An error occurred: {mutation.isError && <div>An error occurred: {mutation.error instanceof Error ? mutation.error.message : 'Unknown error'}</div>}
+                    </div>}
                     {mutation.isSuccess && <div>Mutation was successful</div>}
                 </div>
             )}
