@@ -167,7 +167,7 @@ const MyDropzone: React.FC = () => {
                 worker.terminate();
             }
         };
-    }, [isSignedIn, initializeWorker]);
+    }, [isSignedIn]);
 
     const handleFilePreview = useCallback((files: File[]) => {
         const fileURLs = files.map((file) => URL.createObjectURL(file));
@@ -193,11 +193,12 @@ const MyDropzone: React.FC = () => {
             const file = new File([blob], 'image.png', { type: blob.type });
             console.log("this is the file", file)
             const { data } = await worker.recognize(file);
+            console.log("this is the data", data);
             console.log("this is the text", text);
             text += data.text + '\n';
         }
         setOcrText(text);
-    }, [filePreviews, worker]);
+    }, [filePreviews]);
 
     const postOCRText = useMutation(async (text: string) => {
         const response = await fetch('/api/postOcrText', {
