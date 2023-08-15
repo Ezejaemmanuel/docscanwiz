@@ -135,128 +135,124 @@
 //                 {postOCRText.isError && <ErrorDisplayComponent errorMessage={'Something went wrong'} />}
 //             </form>
 //         </div>);
-// };
+// // };
 "use client";
-import React, { useRef, useCallback, useEffect, useState } from 'react';
-import { useDropzone } from 'react-dropzone';
-import { useAuth } from "@clerk/nextjs";
-// import SignInComponent from '../YouAreNotSignedIn';
-import Image from 'next/image';
-// import { useMutation } from '@tanstack/react-query';
-// import ErrorDisplayComponent from '../ErrorInComponent';
+import { useEffect, useRef, useState } from 'react';
 import { createWorker } from 'tesseract.js';
+import { useDropzone } from 'react-dropzone';
 
-const MyDropzone: React.FC = () => {
-    const [filePreviews, setFilePreviews] = useState<string[]>([]);
-    const [ocrText, setOcrText] = useState("");
-    const [progressLabel, setProgressLabel] = useState("idle");
+const Home = () => {
+    const [imageData, setImageData] = useState<null | string>(null);
+    console.log("imagedata 1", imageData);
+    const loadFile = (file: File) => {
+        const reader = new FileReader();
+        console.log("this the reader 2", reader);
+        reader.onloadend = () => {
+            console.log("this is reader 3", reader);
+            const imageDataUri = reader.result;
+            console.log("this is the imageDataUri 4", imageDataUri);
+            setImageData(imageDataUri as string);
+            console.log("imagedata 5", imageData);
+
+        };
+        reader.readAsDataURL(file);
+        console.log("this the reader 6", reader);
+
+    };
+
     const [progress, setProgress] = useState(0);
-    const workerRef = useRef<any>(null);
-    // const isSignedIn = useAuth().isSignedIn;
-    const worker = workerRef.current;
+    console.log("this is the initial progreess 7", progress);
+    const [progressLabel, setProgressLabel] = useState('idle');
+    console.log("this is the initial progreeLabel 8", progressLabel);
+    const [ocrResult, setOcrResult] = useState('');
+    console.log("this is the initial ocrResult 9", ocrResult);
 
-    const loadFile = useCallback((files: File[]) => {
-        files.forEach((file) => {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const imageDataUri = reader.result as string;
-                setFilePreviews((prevAcceptedFiles) => [...prevAcceptedFiles, imageDataUri]);
-            };
-            reader.readAsDataURL(file);
-        });
+    const workerRef = useRef<Tesseract.Worker | null>(null);
+    console.log("this is the initial workerRef 10", workerRef);
+    useEffect(() => {
+        const loadWorker = async () => {
+            console.log("this is the loadWorker 11", loadWorker);
+            const worker = createWorker({
+                logger: message => {
+                    if ('progress' in message) {
+                        console.log("this is the initial message 12", message);
+                        setProgress(message.progress);
+                        console.log("this is the progreess that was set 13a", progress);
+                        setProgressLabel(message.progress === 1 ? 'Done' : message.status);
+                        console.log("this is the set progressLbael 13b", progressLabel);
+                    }
+                    console.log("this is the created worker 14", worker);
+
+                },
+            });
+            workerRef.current = await worker;
+            console.log("this is the current workerRef 15", workerRef);
+        };
+        loadWorker();
+        return () => {
+            workerRef.current?.terminate();
+            workerRef.current = null;
+        }
     }, []);
 
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
-        accept: {
-            "image/png": [".png"],
-            "image/jpeg": [".jpg", ".jpeg"],
-        },
-        onDrop: (files) => {
-            loadFile(files);
-        }
-    });
-
-    useEffect(() => {
-        workerRef.current = createWorker({
-            logger: (m: any) => {
-                console.log('OCR Logger:', m);
-                if (m.status === 'recognizing text') {
-                    setProgress(m.progress);
-                    setProgressLabel(m.status);
-                }
-            }
-        });
-
-        return () => {
-            if (worker) {
-                worker.terminate();
-            }
-        };
-    }, [worker]);
-
-    const handleExtract = useCallback(async () => {
-        console.log('Starting OCR extraction');
+    const handleExtract = async () => {
         setProgress(0);
+        console.log("this is the progreess that was set 16", progress);
         setProgressLabel('starting');
+        console.log("this is the set progressLbael 17", progressLabel);
+
+        const worker = workerRef.current!;
         await worker.load();
         await worker.loadLanguage('eng');
         await worker.initialize('eng');
 
-        let text = "";
-        for (const fileURL of filePreviews) {
-            const { data } = await worker.recognize(fileURL);
-            text += data.text + '\n';
-        }
-        setOcrText(text);
-        console.log('OCR extraction complete');
-    }, [filePreviews, worker]);
+        const response = await worker.recognize(imageData!);
+        setOcrResult(response.data.text);
+        console.log(response.data);
+    };
 
-    console.log('filePreviews:', filePreviews);
-    console.log('ocrText:', ocrText);
-    console.log('progressLabel:', progressLabel);
-    console.log('progress:', progress);
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        onDrop: (files) => loadFile(files[0]),
+        accept: {
+            "image/png": [".png"],
+            "image/jpeg": [".jpg", ".jpeg"],
+        },
+        multiple: false,
+    });
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen dark:bg-black">
-            {/* Display the dropzone */}
-            <div {...getRootProps()}>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+            <div {...getRootProps()} className="flex flex-col items-center justify-center p-10 border-2 border-dashed">
                 <input {...getInputProps()} />
                 {isDragActive ? (
-                    <p>Drop the files here...</p>
+                    <p className="text-xl">Drop the image here...</p>
                 ) : (
-                    <p>Drag 'n' drop some files here, or click to select files</p>
+                    <p className="text-xl">Drag 'n' drop an image here, or click to select a file</p>
                 )}
             </div>
 
-            {/* Display the file previews */}
-            {filePreviews.map((file, index) => (
-                <div key={index}>
-                    <Image src={file} alt={`File ${index + 1}`} />
-                </div>
-            ))}
+            {imageData && <img src={imageData} alt="Uploaded" className="w-full mt-4" />}
 
-            {/* Display the OCR text */}
-            <div>
-                {ocrText && <p>{ocrText}</p>}
-            </div>
-
-            {/* Extract button */}
             <button
                 type="button"
                 className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 onClick={handleExtract}
-                disabled={filePreviews.length === 0}
+                disabled={!imageData || !workerRef.current}
             >
                 Extract
             </button>
 
-            {/* Display the progress and status of the OCR operation */}
-            <div>
-                <p>{progressLabel.toUpperCase()}</p>
-                <progress value={progress * 100} max="100" />
-            </div>
+            <p className="mt-4">{progressLabel.toUpperCase()}</p>
+            <progress value={progress * 100} max="100" className="w-full h-2 mt-2" />
+
+            {ocrResult && (
+                <div className="mt-4">
+                    <p className="text-xl">RESULT</p>
+                    <pre className="bg-black text-white p-4">{ocrResult}</pre>
+                </div>
+            )}
         </div>
     );
-};
+}
 
-export default MyDropzone;
+export default Home;
