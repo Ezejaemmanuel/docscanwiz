@@ -283,17 +283,16 @@ const Home = () => {
     };
 
     const mutation = useMutation((ocrResult: string) =>
-        fetch('/api/ocr', {
+        fetch('/api/recieveTextAndAddToDatabase', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ id: uuidv4(), ocrResult }),
-        }).then(res => {
+        }).then(async res => {
             if (!res.ok) {
-                return res.json().then((json) => {
-                    throw new Error(json.message || 'Something went wrong');
-                });
+                const json = await res.json();
+                throw new Error(json.message || 'Something went wrong');
             }
             return res.json();
         })
