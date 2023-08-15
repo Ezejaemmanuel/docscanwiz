@@ -137,7 +137,6 @@
 //         </div>);
 // };
 "use client";
-// export default MyDropzone;
 import React, { useRef, useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useAuth } from "@clerk/nextjs";
@@ -146,7 +145,6 @@ import Image from 'next/image';
 // import { useMutation } from '@tanstack/react-query';
 // import ErrorDisplayComponent from '../ErrorInComponent';
 import { createWorker } from 'tesseract.js';
-
 
 const MyDropzone: React.FC = () => {
     const [filePreviews, setFilePreviews] = useState<string[]>([]);
