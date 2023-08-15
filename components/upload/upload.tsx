@@ -188,7 +188,7 @@ const Home = () => {
                 {isDragActive ? (
                     <p className="text-xl">Drop the image here...</p>
                 ) : (
-                    <p className="text-xl">Drag 'n' drop an image here, or click to select a file</p>
+                    <p className="text-xl">Drag and drop an image here, or click to select a file</p>
                 )}
             </div>
 
