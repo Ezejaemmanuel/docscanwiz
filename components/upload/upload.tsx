@@ -232,6 +232,7 @@ import { createWorker } from 'tesseract.js';
 import { useDropzone } from 'react-dropzone';
 import { v4 as uuidv4 } from 'uuid';
 import { useMutation } from '@tanstack/react-query';
+import Image from "next/image";
 
 const Home = () => {
     const [imageData, setImageData] = useState<null | string>(null);
@@ -322,7 +323,7 @@ const Home = () => {
                 )}
             </div>
 
-            {imageData && <img src={imageData} alt="Uploaded" className="w-full mt-4" />}
+            {imageData && <Image src={imageData} alt="Uploaded" width={400} height={400} className="w-full mt-4" />}
 
             <button
                 type="button"
