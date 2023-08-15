@@ -429,60 +429,55 @@ const RichTextEditor = () => {
     }, []);
 
     return (<Slate editor={editor} initialValue={value} onChange={(value) => setValue(value)}>
-
-        <Toolbar className="py-4 flex justify-center space-x-4 bg-gray-200 rounded-lg shadow-md">
-            <button className="btn btn-primary px-4 py-2 rounded-md hover:bg-blue-500 hover:text-white" onMouseDown={(event) => {
+        <Toolbar className="dark:bg-gray-800 py-4 flex justify-center space-x-4 bg-gray-200 rounded-lg shadow-md">
+            <button className="dark:bg-blue-500 dark:text-white bg-blue-400 text-white px-4 py-2 rounded-md hover:bg-blue-500" onMouseDown={(event) => {
                 event.preventDefault();
                 CustomEditor.toggleBoldMark(editor);
             }}>
                 Bold
             </button>
-            <button className="btn btn-secondary px-4 py-2 rounded-md hover:bg-purple-500 hover:text-white" onMouseDown={(event) => {
+            <button className="dark:bg-purple-500 dark:text-white bg-purple-400 text-white px-4 py-2 rounded-md hover:bg-purple-500" onMouseDown={(event) => {
                 event.preventDefault();
                 CustomEditor.toggleCodeBlock(editor);
             }}>
                 Code Block
             </button>
-            <button className="btn btn-tertiary px-4 py-2 rounded-md hover:bg-green-500 hover:text-white" onMouseDown={(event) => {
+            <button className="dark:bg-green-500 dark:text-white bg-green-400 text-white px-4 py-2 rounded-md hover:bg-green-500" onMouseDown={(event) => {
                 event.preventDefault();
                 CustomEditor.toggleUnderlineMark(editor);
             }}>
                 Underline
             </button>
-            <button className="btn btn-quaternary px-4 py-2 rounded-md hover:bg-red-500 hover:text-white" onMouseDown={(event) => {
+            <button className="dark:bg-red-500 dark:text-white bg-red-400 text-white px-4 py-2 rounded-md hover:bg-red-500" onMouseDown={(event) => {
                 event.preventDefault();
                 CustomEditor.toggleStrikethroughMark(editor);
             }}>
                 Strikethrough
             </button>
-            <button className="btn btn-primary px-4 py-2 rounded-md hover:bg-blue-500 hover:text-white" onMouseDown={(event) => {
+            <button className="dark:bg-yellow-500 dark:text-white bg-yellow-400 text-white px-4 py-2 rounded-md hover:bg-yellow-500" onMouseDown={(event) => {
                 event.preventDefault();
                 CustomEditor.toggleBlockquote(editor);
             }}>
                 Blockquote
             </button>
-            <button className="btn btn-secondary px-4 py-2 rounded-md hover:bg-purple-500 hover:text-white" onMouseDown={(event) => {
+            <button className="dark:bg-indigo-500 dark:text-white bg-indigo-400 text-white px-4 py-2 rounded-md hover:bg-indigo-500" onMouseDown={(event) => {
                 event.preventDefault();
                 CustomEditor.toggleBulletList(editor);
             }}>
                 Bullet List
             </button>
-            <button className="btn btn-tertiary px-4 py-2 rounded-md hover:bg-green-500 hover:text-white" onMouseDown={(event) => {
+            <button className="dark:bg-green-500 dark:text-white bg-green-400 text-white px-4 py-2 rounded-md hover:bg-green-500" onMouseDown={(event) => {
                 event.preventDefault();
                 CustomEditor.toggleNumberList(editor);
             }}>
                 Number List
             </button>
-            <button className="btn btn-quaternary px-4 py-2 rounded-md hover:bg-red-500 hover:text-white" onMouseDown={(event) => {
+            <button className="dark:bg-red-500 dark:text-white bg-red-400 text-white px-4 py-2 rounded-md hover:bg-red-500" onMouseDown={(event) => {
                 event.preventDefault();
                 const url = window.prompt('Enter the URL of the link:');
-                if (!url) return;
-                CustomEditor.insertLink(editor, url);
-            }}>
-                Insert Link
-            </button>
+                if (!url) return; CustomEditor.insertLink(editor, url);
+            }}> Insert Link </button>
         </Toolbar>
-        {/* Editor content */}
 
 
         <Editable
