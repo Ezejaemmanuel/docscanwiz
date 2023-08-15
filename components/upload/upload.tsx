@@ -232,7 +232,7 @@ const MyDropzone: React.FC = () => {
                     </p>
                     {filePreviews.map((file, index) => (
                         <div key={index} className="p-4">
-                            <img src={file} alt={`preview ${index}`} className="w-full max-w-[300px]" />
+                            <Image src={file} alt={`preview ${index}`} width={200} height={200} className="w-full max-w-[300px]" />
                         </div>
                     ))}
                 </div>
