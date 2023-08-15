@@ -226,11 +226,11 @@
 // }
 
 // export default Home;
-
 "use client";
 import { useEffect, useRef, useState } from 'react';
 import { createWorker } from 'tesseract.js';
 import { useDropzone } from 'react-dropzone';
+import { v4 as uuidv4 } from 'uuid';
 import { useMutation } from '@tanstack/react-query';
 
 const Home = () => {
@@ -287,7 +287,7 @@ const Home = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ ocrResult }),
+            body: JSON.stringify({ id: uuidv4(), ocrResult }),
         }).then(res => {
             if (!res.ok) {
                 return res.json().then((json) => {
@@ -348,7 +348,7 @@ const Home = () => {
                     >
                         {mutation.isLoading ? "Sending..." : "Send to Database"}
                     </button>
-                    {mutation.isError && <div>An error occurred: {mutation.error.message || "something went wrong"}</div>}
+                    {mutation.isError && <div>An error occurred:  some where </div>}
                     {mutation.isSuccess && <div>Mutation was successful</div>}
                 </div>
             )}
