@@ -147,6 +147,7 @@ import Image from 'next/image';
 // import ErrorDisplayComponent from '../ErrorInComponent';
 import { createWorker } from 'tesseract.js';
 
+
 const MyDropzone: React.FC = () => {
     const [filePreviews, setFilePreviews] = useState<string[]>([]);
     const [ocrText, setOcrText] = useState("");
