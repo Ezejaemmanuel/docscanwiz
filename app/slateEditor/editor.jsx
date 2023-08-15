@@ -325,14 +325,7 @@ const CustomEditor = {
         Editor.addMark(editor, 'strikethrough', isActive ? null : true);
     },
 
-    toggleBlockquote(editor) {
-        const isActive = CustomEditor.isBlockActive(editor, 'quote');
-        Transforms.setNodes(
-            editor,
-            { type: isActive ? 'paragraph' : 'quote' },
-            { match: n => Editor.isBlock(editor, n) }
-        );
-    },
+
 
     toggleBulletList(editor) {
         const isActive = CustomEditor.isBlockActive(editor, 'bulleted-list');
@@ -352,12 +345,7 @@ const CustomEditor = {
         );
     },
 
-    insertLink(editor, url) {
-        if (editor.selection) {
-            Editor.insertText(editor, url);
-            Editor.addMark(editor, 'link', true);
-        }
-    },
+
 
     isBlockActive(editor, format) {
         const [match] = Editor.nodes(editor, {
@@ -409,10 +397,6 @@ const RichTextEditor = () => {
         switch (props.element.type) {
             case 'code':
                 return <CodeElement {...props} />;
-            case 'link':
-                return <LinkElement {...props} />;
-            case 'quote':
-                return <QuoteElement {...props} />;
             case 'bulleted-list':
                 return <ul {...props.attributes}>{props.children}</ul>;
             case 'numbered-list':
