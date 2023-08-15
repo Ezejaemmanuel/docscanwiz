@@ -142,10 +142,10 @@
 import React, { useRef, useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useAuth } from "@clerk/nextjs";
-import SignInComponent from '../YouAreNotSignedIn';
+//import SignInComponent from '../YouAreNotSignedIn';
 import Image from 'next/image';
-import { useMutation } from '@tanstack/react-query';
-import ErrorDisplayComponent from '../ErrorInComponent';
+//import { useMutation } from '@tanstack/react-query';
+//import ErrorDisplayComponent from '../ErrorInComponent';
 import { createWorker } from 'tesseract.js';
 
 const MyDropzone: React.FC = () => {
@@ -154,7 +154,7 @@ const MyDropzone: React.FC = () => {
     const [progressLabel, setProgressLabel] = useState("idle");
     const [progress, setProgress] = useState(0);
     const workerRef = useRef<any>(null);
-    const isSignedIn = useAuth().isSignedIn;
+    // const isSignedIn = useAuth().isSignedIn;
     const worker = workerRef.current;
 
     const loadFile = useCallback((files: File[]) => {
