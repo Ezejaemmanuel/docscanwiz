@@ -167,7 +167,7 @@ const MyDropzone: React.FC = () => {
                 worker.terminate();
             }
         };
-    }, [isSignedIn, initializeWorker, worker]);
+    }, [isSignedIn, initializeWorker]);
 
     const handleFilePreview = useCallback((files: File[]) => {
         const fileURLs = files.map((file) => URL.createObjectURL(file));
