@@ -189,8 +189,11 @@ const MyDropzone: React.FC = () => {
         let text = '';
         for (const fileURL of filePreviews) {
             const blob = await fetch(fileURL).then((response) => response.blob());
+            console.log("this is the blob", blob)
             const file = new File([blob], 'image.png', { type: blob.type });
+            console.log("this is the file", file)
             const { data } = await worker.recognize(file);
+            console.log("this is the text", text);
             text += data.text + '\n';
         }
         setOcrText(text);
