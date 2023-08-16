@@ -108,11 +108,12 @@ async function getContent(uuid: string) {
 const MyQuillComponent: React.FC<MyQuillComponentProps> = ({ uuid }) => {
 
     const { data } = useQuery({
-        queryKey: ["stream-hydrate-users"],
+        queryKey: ["initial data"],
         queryFn: () => getContent(uuid),
         suspense: true,
         staleTime: 5 * 1000,
     });
+    console.log("this is the initial data", data)
     const [value, setValue] = useState<string>(data || ' ');
     const quillRef = useRef<ReactQuill>(null);
 
