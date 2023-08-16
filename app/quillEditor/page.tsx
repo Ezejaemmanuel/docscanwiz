@@ -3,6 +3,8 @@ import LoadingComponent from '@/components/aboutToLoad';
 import dynamic from 'next/dynamic';
 import React from 'react';
 import { useSearchParams } from 'next/navigation';
+import { useAuth } from '@clerk/nextjs';
+import SignInComponent from '@/components/YouAreNotSignedIn';
 
 
 // Dynamically import MyQuillComponent
@@ -17,6 +19,15 @@ const DefaultEditor = dynamic(() => import('./defaultEditor'), {
 const DynamicQuill: React.FC = () => {
     const searchParams = useSearchParams();
     const uuid = searchParams.get('uuid');
+    const { isLoaded, userId } = useAuth();
+
+    // In case the user signs out while on the page.
+    if (!isLoaded) {
+        return null;
+    }
+    if (!userId) {
+        <SignInComponent />
+    }
     if (!uuid) {
         return (
             <div className="flex justify-center items-center h-screen pt-20 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">

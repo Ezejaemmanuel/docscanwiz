@@ -85,7 +85,6 @@
 // export default MyQuillComponent;
 
 "use client";
-import { useAuth } from '@clerk/nextjs';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import React, { useState, useRef } from 'react';
 import ReactQuill from 'react-quill';
@@ -107,12 +106,7 @@ async function getContent(uuid: string) {
     }
 }
 const MyQuillComponent: React.FC<MyQuillComponentProps> = ({ uuid }) => {
-    const { isLoaded, userId, sessionId, getToken } = useAuth();
 
-    // In case the user signs out while on the page.
-    if (!isLoaded || !userId) {
-        return null;
-    }
     const { data } = useQuery({
         queryKey: ["stream-hydrate-users"],
         queryFn: () => getContent(uuid),
