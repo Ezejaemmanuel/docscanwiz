@@ -2,7 +2,7 @@
 // "use client";
 // import { useMutation } from '@tanstack/react-query';
 // import React, { useState } from 'react';
-// import ReactQuill from 'react-quill';
+// import ReactQuill, { Quill } from 'react-quill';
 // import 'react-quill/dist/quill.snow.css';
 
 // interface MyQuillComponentProps {
@@ -10,28 +10,28 @@
 // }
 
 // const MyQuillComponent: React.FC<MyQuillComponentProps> = ({ uuid }) => {
-//     const [value, setValue] = useState<string>('');
+//     const [value, setValue] = useState<any>([]);
 
-//     const modules = {
-//         toolbar: [
-//             ['bold', 'italic', 'underline', 'strike'],
-//             ['blockquote', 'code-block'],
-//             [{ header: 1 }, { header: 2 }],
-//             [{ list: 'ordered' }, { list: 'bullet' }],
-//             [{ script: 'sub' }, { script: 'super' }],
-//             [{ indent: '-1' }, { indent: '+1' }],
-//             [{ direction: 'rtl' }],
-//             [{ size: ['small', false, 'large', 'huge'] }],
-//             [{ header: [1, 2, 3, 4, 5, 6, false] }],
-//             [{ color: [] }, { background: [] }],
-//             [{ font: [] }],
-//             [{ align: [] }],
-//             ['clean'],
-//             ['link', 'image', 'video'],
-//             ['emoji'],
-//             ['fullscreen'],
-//         ],
-//     };
+// const modules = {
+//     toolbar: [
+//         ['bold', 'italic', 'underline', 'strike'],
+//         ['blockquote', 'code-block'],
+//         [{ header: 1 }, { header: 2 }],
+//         [{ list: 'ordered' }, { list: 'bullet' }],
+//         [{ script: 'sub' }, { script: 'super' }],
+//         [{ indent: '-1' }, { indent: '+1' }],
+//         [{ direction: 'rtl' }],
+//         [{ size: ['small', false, 'large', 'huge'] }],
+//         [{ header: [1, 2, 3, 4, 5, 6, false] }],
+//         [{ color: [] }, { background: [] }],
+//         [{ font: [] }],
+//         [{ align: [] }],
+//         ['clean'],
+//         ['link', 'image', 'video'],
+//         ['emoji'],
+//         ['fullscreen'],
+//     ],
+// };
 
 //     const mutation = useMutation((ocrResult: string) =>
 //         fetch('/api/recieveTextAndAddToDatabase', {
@@ -50,11 +50,12 @@
 //     );
 
 //     const handleSendToDatabase = () => {
-//         mutation.mutate(value);
+//         const deltaString = JSON.stringify(value);
+//         mutation.mutate(deltaString);
 //     };
 
 //     return (
-//         <div className="bg-gray-200 p-4 rounded-md shadow-lg">
+//         <div className="bg-white dark:bg-gray-700 p-4 rounded-md shadow-lg text-gray-900 dark:text-white">
 //             <ReactQuill
 //                 theme="snow"
 //                 value={value}
@@ -75,24 +76,51 @@
 //                 <p className="text-red-500 mt-2">
 //                     Error: {mutation.isError && <div>An error occurred: {mutation.error instanceof Error ? mutation.error.message : 'Unknown error'}</div>}
 //                 </p>
-//             )}
+//             )
+//             }
 //         </div>
+
 //     );
 // };
-
 // export default MyQuillComponent;
+
 "use client";
-import { useMutation } from '@tanstack/react-query';
-import React, { useState } from 'react';
-import ReactQuill, { Quill } from 'react-quill';
+import { useAuth } from '@clerk/nextjs';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import React, { useState, useRef } from 'react';
+import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 interface MyQuillComponentProps {
     uuid: string;
 }
-
+async function getContent(uuid: string) {
+    try {
+        const res = await fetch(`api/getContent/${uuid}`);
+        if (!res.ok) {
+            throw new Error('Error fetching user data');
+        }
+        const content = await res.json();
+        return content;
+    } catch (error: any) {
+        throw new Error(error.message);
+    }
+}
 const MyQuillComponent: React.FC<MyQuillComponentProps> = ({ uuid }) => {
-    const [value, setValue] = useState<any>([]);
+    const { isLoaded, userId, sessionId, getToken } = useAuth();
+
+    // In case the user signs out while on the page.
+    if (!isLoaded || !userId) {
+        return null;
+    }
+    const { data } = useQuery({
+        queryKey: ["stream-hydrate-users"],
+        queryFn: () => getContent(uuid),
+        suspense: true,
+        staleTime: 5 * 1000,
+    });
+    const [value, setValue] = useState<string>(data || ' ');
+    const quillRef = useRef<ReactQuill>(null);
 
     const modules = {
         toolbar: [
@@ -115,6 +143,7 @@ const MyQuillComponent: React.FC<MyQuillComponentProps> = ({ uuid }) => {
         ],
     };
 
+
     const mutation = useMutation((ocrResult: string) =>
         fetch('/api/recieveTextAndAddToDatabase', {
             method: 'POST',
@@ -132,13 +161,18 @@ const MyQuillComponent: React.FC<MyQuillComponentProps> = ({ uuid }) => {
     );
 
     const handleSendToDatabase = () => {
-        const deltaString = JSON.stringify(value);
-        mutation.mutate(deltaString);
+        if (quillRef.current) {
+            const quill = quillRef.current.getEditor();
+            const delta = quill.getContents();
+            const deltaString = JSON.stringify(delta);
+            mutation.mutate(deltaString);
+        }
     };
 
     return (
-        <div className="bg-gray-200 p-4 rounded-md shadow-lg">
+        <div className="bg-white dark:bg-gray-700 p-4 rounded-md shadow-lg text-gray-900 dark:text-white">
             <ReactQuill
+                ref={quillRef}
                 theme="snow"
                 value={value}
                 onChange={setValue}
@@ -157,6 +191,17 @@ const MyQuillComponent: React.FC<MyQuillComponentProps> = ({ uuid }) => {
             {mutation.isError && (
                 <p className="text-red-500 mt-2">
                     Error: {mutation.isError && <div>An error occurred: {mutation.error instanceof Error ? mutation.error.message : 'Unknown error'}</div>}
-                </p>)} </div>);
+                </p>
+            )
+            }
+            {mutation.isSuccess && (
+                <p className="text-blue-500 mt-2">
+                    saved to database
+                </p>
+            )
+            }
+        </div>
+
+    );
 };
 export default MyQuillComponent;

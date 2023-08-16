@@ -65,6 +65,7 @@ const LoadingComponent = dynamic(() => import("@/components/aboutToLoad"));
 const MainArea = dynamic(() => import("@/components/dashboard-mainArea"));
 const Sidebar = dynamic(() => import("@/components/sidebar/dashboard-sidebar"));
 
+
 async function getUser(): Promise<User> {
     try {
         const res = await fetch('api/confirmOrCreate');

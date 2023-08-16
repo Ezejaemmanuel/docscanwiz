@@ -233,8 +233,10 @@ import { useDropzone } from 'react-dropzone';
 import { v4 as uuidv4 } from 'uuid';
 import { useMutation } from '@tanstack/react-query';
 import Image from "next/image";
+import Link from 'next/link';
 
 const Home = () => {
+    const uuid = uuidv4();
     const [imageData, setImageData] = useState<null | string>(null);
     const loadFile = (file: File) => {
         const reader = new FileReader();
@@ -288,7 +290,7 @@ const Home = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id: uuidv4(), ocrResult }),
+            body: JSON.stringify({ uuid: uuid, ocrResult }),
         }).then(async res => {
             if (!res.ok) {
                 const json = await res.json();
@@ -350,7 +352,15 @@ const Home = () => {
                     </button>
                     {mutation.isError && <div>An error occurred: {mutation.isError && <div>An error occurred: {mutation.error instanceof Error ? mutation.error.message : 'Unknown error'}</div>}
                     </div>}
-                    {mutation.isSuccess && <div>Mutation was successful</div>}
+                    {mutation.isSuccess && (
+                        <div className="mt-4">
+                            <p className="text-green-500">Mutation was successful!</p>
+                            <Link href={`/quillEditor?uuid=${uuid}`} className="mt-2 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                Go to Editor
+                            </Link>
+                        </div>
+                    )}
+
                 </div>
             )}
         </div>

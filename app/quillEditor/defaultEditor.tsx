@@ -31,7 +31,7 @@ const DefaultEditor: React.FC = () => {
         ],
     };
     return (
-        <div className="bg-gray-200 p-4 rounded-md shadow-lg">
+        <div className="bg-white dark:bg-gray-700 p-4 rounded-md shadow-lg text-gray-900 dark:text-white">
             <ReactQuill
                 theme="snow"
                 value={value}
@@ -41,6 +41,7 @@ const DefaultEditor: React.FC = () => {
                 className="resize-y"
             />
         </div>
+
 
     );
 };

@@ -3,6 +3,8 @@ import LoadingComponent from '@/components/aboutToLoad';
 import dynamic from 'next/dynamic';
 import React from 'react';
 import { useSearchParams } from 'next/navigation';
+
+
 // Dynamically import MyQuillComponent
 const MyQuillComponent = dynamic(() => import('./editor'), {
     loading: () => <LoadingComponent loadingText={'loading text editor'} />,
@@ -17,16 +19,17 @@ const DynamicQuill: React.FC = () => {
     const uuid = searchParams.get('uuid');
     if (!uuid) {
         return (
-            <div className="flex justify-center items-center h-screen pt-20 bg-gray-100 dark:bg-gray-900">
+            <div className="flex justify-center items-center h-screen pt-20 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
                 <DefaultEditor />
             </div>
         );
     }
     return (
-        <div className="flex justify-center items-center h-screen pt-20 bg-gray-100 dark:bg-gray-900">
+        <div className="flex justify-center items-center h-screen pt-20 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
             <MyQuillComponent uuid={uuid} />
         </div>
     );
+
 }
 
 export default DynamicQuill;
