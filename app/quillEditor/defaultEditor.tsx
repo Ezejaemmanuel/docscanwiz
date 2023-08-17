@@ -1,3 +1,4 @@
+// quillEditor/defaultEditor
 "use client";
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';

@@ -1,3 +1,4 @@
+// /quillEditor/page.tsx
 "use client";
 import LoadingComponent from '@/components/aboutToLoad';
 import dynamic from 'next/dynamic';

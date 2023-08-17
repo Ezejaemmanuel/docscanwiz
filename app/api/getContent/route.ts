@@ -1,11 +1,18 @@
+//this is the api/getContent/[uuid]/route.ts
 import { prisma } from '@/lib/prisma';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { currentUser } from "@clerk/nextjs";
 
-export async function GET(context: { params: { uuid: string } }) {
-    const email = await currentUser().then(email => email?.emailAddresses[0].emailAddress);
-    const { uuid } = context.params;
+export async function GET(request: NextRequest) {
+    //const uuid =  request.nextUrl.searchParams.get("uuid");
+    const url = new URL(request.url);
+    const uuid = url.searchParams.get("uuid");
 
+    const email = await currentUser().then(email => email?.emailAddresses[0].emailAddress);
+    if (!uuid) {
+        return NextResponse.json({ error: "uuid not found" }, { status: 404 });
+
+    }
 
 
     if (!email) {

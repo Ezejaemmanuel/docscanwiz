@@ -1,4 +1,4 @@
-
+// this is the /page.tsx
 import React from 'react';
 
 import WhyChooseUs from '@/components/WhyChooseUs';

@@ -1,3 +1,4 @@
+// dashbooard/page.tsx
 import React, { FC } from 'react'
 import getQueryClient from '@/utils/getQueryClient';
 import { Hydrate, dehydrate } from '@tanstack/react-query';

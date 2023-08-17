@@ -1,4 +1,4 @@
-
+//api/recieveTextAndAddToDatabase/route.ts
 import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 import { currentUser } from "@clerk/nextjs";
