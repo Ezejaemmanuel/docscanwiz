@@ -37,8 +37,8 @@ const MyQuillComponent: React.FC<MyQuillComponentProps> = ({ uuid }) => {
         suspense: true,
         staleTime: 5 * 1000,
     });
-    console.log("this is the initial data", data)
-    const [value, setValue] = useState<string>(data || ' ');
+    console.log("this is the initial data", data.quillData)
+    const [value, setValue] = useState<string>(data.quillData || ' ');
     console.log("this is the actual value", value);
     const quillRef = useRef<ReactQuill>(null);
 
