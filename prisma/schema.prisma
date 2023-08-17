@@ -55,8 +55,7 @@ model Content {
 
   quillData String
   uuid      String @unique
-
   // Relationships
-  user   User @relation(fields: [userId], references: [id])
-  userId Int
+  user      User   @relation(fields: [userId], references: [id])
+  userId    Int
 }

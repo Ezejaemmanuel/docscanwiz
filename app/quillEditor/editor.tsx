@@ -120,10 +120,11 @@ const MyQuillComponent: React.FC<MyQuillComponentProps> = ({ uuid }) => {
             {mutation.data && (
                 <p className="mt-2 text-blue-500">
                     <p>UUID: {mutation.data.uuid}</p>
-                    <p>Created At: {mutation.data.createdAt}</p>
-                    <p>Updated At: {mutation.data.updatedAt}</p>
+                    <p>Created At: {new Date(mutation.data.createdAt).toLocaleString()}</p>
+                    <p>Updated At: {new Date(mutation.data.updatedAt).toLocaleString()}</p>
                     <p>User ID: {mutation.data.userId}</p>
                 </p>
+
             )}
         </div>
     );
