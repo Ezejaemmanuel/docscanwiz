@@ -11,7 +11,7 @@ const AsideDashboardPage = dynamic(() => import('./aside'))
 //     console.log("this is the user", user);
 //     return user
 // }
-async function getUser() {
+async function getUser(): Promise<any> {
     try {
         const res = await fetch('api/confirmOrCreate');
         if (!res.ok) {
