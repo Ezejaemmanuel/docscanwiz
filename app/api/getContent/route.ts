@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
         });
 
         if (!user) {
-            return NextResponse.json({ error: "User not found from database" }, { status: 404 });
+            return NextResponse.json({ error: `User ${email} not found from database ` }, { status: 404 });
         }
 
         const content = await prisma.content.findUnique({
@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
         });
 
         if (!content) {
-            return NextResponse.json({ error: "Content not found for the provided UUID" }, { status: 404 });
+            return NextResponse.json({ error: `Content not found for the provided UUID the uuid is ${uuid}` }, { status: 404 });
         }
 
         return NextResponse.json(content);

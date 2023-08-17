@@ -1,7 +1,8 @@
 // quillEditor/editor.tsx
 "use client";
+import ErrorDisplayComponent from '@/components/ErrorInComponent';
+import LoadingComponent from '@/components/aboutToLoad';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import error from 'next/error';
 import React, { useState, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -14,11 +15,12 @@ async function getContent(uuid: string) {
     try {
         const res = await fetch(`api/getContent?uuid=${uuid}`);
         console.log("this is the res 1", res);
+
         if (!res.ok) {
             console.log("there was an error");
             // Get the error message from the server's response
             const serverErrorMessage = await res.text();
-            throw new Error(serverErrorMessage);
+            throw new Error(serverErrorMessage || "an error occured");
         }
         const content = await res.json();
         console.log("this is the content 2", content);
@@ -30,12 +32,24 @@ async function getContent(uuid: string) {
 
 const MyQuillComponent: React.FC<MyQuillComponentProps> = ({ uuid }) => {
     console.log("this is the uuid 1", uuid);
-    const { data } = useQuery({
+    const { data, isLoading, isError, error } = useQuery({
         queryKey: ["initial data"],
         queryFn: () => getContent(uuid),
         suspense: true,
         staleTime: 5 * 1000,
     });
+    if (isLoading) {
+        return <LoadingComponent loadingText={"loading editor data"} />
+    }
+
+    if (isError) {
+        let errorMessage = 'An error occurred';
+        if (error instanceof Error) {
+            errorMessage = error.message;
+        }
+        return <ErrorDisplayComponent errorMessage={errorMessage} />
+    }
+
     console.log("this is the initial data", data)
     const [value, setValue] = useState<string>(data || ' ');
     console.log("this is the actual value", value);
