@@ -70,7 +70,7 @@ const MyQuillComponent: React.FC<MyQuillComponentProps> = ({ uuid }) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id: uuid, ocrResult }),
+            body: JSON.stringify({ uuid: uuid, ocrResult }),
         }).then(async (res) => {
             if (!res.ok) {
                 const json = await res.json();
@@ -89,7 +89,7 @@ const MyQuillComponent: React.FC<MyQuillComponentProps> = ({ uuid }) => {
     };
 
     return (
-        <div className="bg-white dark:bg-gray-700 p-4 rounded-md shadow-lg text-gray-900 dark:text-white">
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-md shadow-lg text-gray-900 dark:text-gray-100">
             <ReactQuill
                 ref={quillRef}
                 theme="snow"
@@ -102,32 +102,28 @@ const MyQuillComponent: React.FC<MyQuillComponentProps> = ({ uuid }) => {
             <button
                 onClick={handleSendToDatabase}
                 disabled={mutation.isLoading}
-                className={`bg-blue-500 text-white px-4 py-2 rounded ${mutation.isLoading ? 'opacity-50 cursor-not-allowed' : ''
+                className={`mt-4 bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded ${mutation.isLoading ? 'opacity-50 cursor-not-allowed' : ''
                     }`}
             >
                 {mutation.isLoading ? 'Saving...' : 'Save to Database'}
             </button>
             {mutation.isError && (
-                <p className="text-red-500 mt-2">
-                    Error: {mutation.isError && <div>An error occurred: {mutation.error instanceof Error ? mutation.error.message : 'Unknown error'}</div>}
+                <p className="mt-2 text-red-500">
+                    Error: {mutation.error instanceof Error ? mutation.error.message : 'Unknown error'}
                 </p>
-            )
-            }
+            )}
             {mutation.isSuccess && (
-                <p className="text-blue-500 mt-2">
-                    saved to database
+                <p className="mt-2 text-green-500">
+                    Saved to database
                 </p>
-            )
-            }
-
+            )}
             {mutation.data && (
-                <p className="text-blue-500 mt-2">
+                <p className="mt-2 text-blue-500">
                     {mutation.data}
                 </p>
-            )
-            }
+            )}
         </div>
-
     );
+
 };
 export default MyQuillComponent;
