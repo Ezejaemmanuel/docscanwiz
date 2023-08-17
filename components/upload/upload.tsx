@@ -1,4 +1,3 @@
-// componentents/upload/upload.tsx
 "use client";
 import { useEffect, useRef, useState } from 'react';
 import { createWorker } from 'tesseract.js';
@@ -9,7 +8,7 @@ import Image from "next/image";
 import Link from 'next/link';
 
 const Home = () => {
-    const uuid = uuidv4();
+    const [uuid, setUuid] = useState(uuidv4());
     const [imageData, setImageData] = useState<null | string>(null);
     const loadFile = (file: File) => {
         const reader = new FileReader();
@@ -69,7 +68,9 @@ const Home = () => {
                 const json = await res.json();
                 throw new Error(json.message || 'Something went wrong');
             }
-            return res.json();
+            const data = await res.json();
+            setUuid(data.uuid); // Update the uuid with the one from the database
+            return data;
         })
     );
 
@@ -123,8 +124,7 @@ const Home = () => {
                     >
                         {mutation.isLoading ? "Sending..." : "Send to Database"}
                     </button>
-                    {mutation.isError && <div>An error occurred: {mutation.isError && <div>An error occurred: {mutation.error instanceof Error ? mutation.error.message : 'Unknown error'}</div>}
-                    </div>}
+                    {mutation.isError && <div>An error occurred: {mutation.error instanceof Error ? mutation.error.message : 'Unknown error'}</div>}
                     {mutation.isSuccess && (
                         <div className="mt-4">
                             <p className="text-green-500">Mutation was successful!</p>
@@ -133,7 +133,6 @@ const Home = () => {
                             </Link>
                         </div>
                     )}
-
                 </div>
             )}
         </div>
