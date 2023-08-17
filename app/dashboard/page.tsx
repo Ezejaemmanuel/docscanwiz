@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
-import AsideDashboardPage from './aside';
 import getQueryClient from '@/utils/getQueryClient';
 import { Hydrate, dehydrate } from '@tanstack/react-query';
-
+import dynamic from 'next/dynamic';
+const AsideDashboardPage = dynamic(() => import('./aside'))
 
 // async function getUser() {
 //     const res = await fetch("api/confirmOrCreate");

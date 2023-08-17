@@ -96,10 +96,13 @@ interface MyQuillComponentProps {
 async function getContent(uuid: string) {
     try {
         const res = await fetch(`api/getContent/${uuid}`);
+        console.log("this is the res 1", res);
         if (!res.ok) {
+            console.log("there was an error");
             throw new Error('Error fetching user data');
         }
         const content = await res.json();
+        console.log("this is the content 2", content);
         return content;
     } catch (error: any) {
         throw new Error(error.message);
@@ -115,6 +118,7 @@ const MyQuillComponent: React.FC<MyQuillComponentProps> = ({ uuid }) => {
     });
     console.log("this is the initial data", data)
     const [value, setValue] = useState<string>(data || ' ');
+    console.log("this is the actual value", value);
     const quillRef = useRef<ReactQuill>(null);
 
     const modules = {
@@ -154,7 +158,6 @@ const MyQuillComponent: React.FC<MyQuillComponentProps> = ({ uuid }) => {
             return res.json();
         })
     );
-
     const handleSendToDatabase = () => {
         if (quillRef.current) {
             const quill = quillRef.current.getEditor();
@@ -192,6 +195,13 @@ const MyQuillComponent: React.FC<MyQuillComponentProps> = ({ uuid }) => {
             {mutation.isSuccess && (
                 <p className="text-blue-500 mt-2">
                     saved to database
+                </p>
+            )
+            }
+
+            {mutation.data && (
+                <p className="text-blue-500 mt-2">
+                    {mutation.data}
                 </p>
             )
             }
