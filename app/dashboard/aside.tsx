@@ -54,7 +54,7 @@ const AsideDashboardPage: React.FC = () => {
     return (
         <div className="flex flex-row">
             <Sidebar setActiveTab={setActiveTab} />
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col ">
                 <MainArea activeTab={activeTab} />
             </div>
         </div>
