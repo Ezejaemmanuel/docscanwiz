@@ -55,7 +55,7 @@
 // export default AsideDashboardPage;
 "use client";
 import dynamic from 'next/dynamic';
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import ErrorDisplayComponent from '@/components/ErrorInComponent';
 import { User } from '@prisma/client'; // Import User type from Prisma

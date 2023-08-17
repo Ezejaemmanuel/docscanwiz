@@ -2,7 +2,7 @@ import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 import { currentUser } from "@clerk/nextjs";
 
-export async function GET(request: Request, context: { params: { uuid: string } }) {
+export async function GET(context: { params: { uuid: string } }) {
     const email = await currentUser().then(email => email?.emailAddresses[0].emailAddress);
     const { uuid } = context.params;
 

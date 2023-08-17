@@ -1,11 +1,7 @@
-
 "use client";
-import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-
-
 
 const DefaultEditor: React.FC = () => {
     const [value, setValue] = useState<string>('');
@@ -31,18 +27,16 @@ const DefaultEditor: React.FC = () => {
         ],
     };
     return (
-        <div className="bg-white dark:bg-gray-700 p-4 rounded-md shadow-lg text-gray-900 dark:text-white">
+        <div className="bg-white dark:bg-dark-primary p-4 rounded-md shadow-lg text-gray-900 dark:text-gray-100">
             <ReactQuill
                 theme="snow"
                 value={value}
                 onChange={setValue}
                 modules={modules}
                 style={{ height: 'auto', minHeight: '200px' }}
-                className="resize-y"
+                className="resize-y text-black dark:text-gray-100 bg-white dark:bg-dark-secondary"
             />
         </div>
-
-
     );
 };
 
