@@ -1,6 +1,7 @@
 // quillEditor/editor.tsx
 "use client";
 import { useMutation, useQuery } from '@tanstack/react-query';
+import error from 'next/error';
 import React, { useState, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -15,7 +16,9 @@ async function getContent(uuid: string) {
         console.log("this is the res 1", res);
         if (!res.ok) {
             console.log("there was an error");
-            throw new Error('Error fetching user data');
+            // Get the error message from the server's response
+            const serverErrorMessage = await res.text();
+            throw new Error(serverErrorMessage);
         }
         const content = await res.json();
         console.log("this is the content 2", content);
@@ -24,6 +27,7 @@ async function getContent(uuid: string) {
         throw new Error(error.message);
     }
 }
+
 const MyQuillComponent: React.FC<MyQuillComponentProps> = ({ uuid }) => {
     console.log("this is the uuid 1", uuid);
     const { data } = useQuery({
